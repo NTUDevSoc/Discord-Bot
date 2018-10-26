@@ -17,7 +17,7 @@ async def on_member_join(member):
     await bot.add_roles(member, role)
 
 #Commands
-@Bot.command
+@bot.command
 async def whois(ctx, user):
     user_info = discord.Embed(title = "Name", description=user.name, color=user.color)
     user_info.set_thumbnail(user.avatar_url)
