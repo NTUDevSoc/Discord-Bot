@@ -1,11 +1,12 @@
 #by Ram :)
 
 #imports
+import os
 import discord
 from discord.ext import commands
 
 #global vars
-TOKEN = ''
+TOKEN = os.environ['DISCORD_TOKEN']
 
 #set up bot object
 bot = commands.Bot(command_prefix='.')
