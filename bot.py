@@ -27,4 +27,4 @@ async def on_ready():
 
 print("Hello :)")
 #run the bot
-#bot.run(TOKEN)
+bot.run(TOKEN)
