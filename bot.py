@@ -2,6 +2,7 @@
 
 #imports
 import os
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -17,10 +18,10 @@ async def on_member_join(member):
     await bot.add_roles(member, role)
 
 #Commands
-@bot.command
-async def whois(ctx, user):
+@bot.command()
+async def whois(channel, user:discord.Member):
     user_info = discord.Embed(title = "Name", description=user.name, color=user.color)
-    user_info.set_thumbnail(user.avatar_url)
+    user_info.set_thumbnail(url=user.avatar_url)
     user_info.set_author(name=user.name + '#' + user.discriminator, icon_url= user.avatar_url)
     user_info.add_field(name='Nickname', value=user.nick)
     user_info.add_field(name='Status', value=user.status)
@@ -30,9 +31,15 @@ async def whois(ctx, user):
     for i in range(len(user.roles)):
         user_roles.append(user.roles[i].mention)
     user_info.add_field(name='Roles', value=', '.join(user_roles))
-    user_info.set_footer(text='ID: ' + user.id)
-    await ctx.send(user_info)
+    user_info.set_footer(text='ID: ' + str(user.id))
+    await channel.send(embed=user_info)
 
+#function to make the bot print every 28mins so Heroku doesn't stop it
+async def stay_awake():
+    await bot.wait_until_ready()
+    while True:
+        print('Im awake :)')
+        await asyncio.sleep(1680)
 
 @bot.event
 async def on_ready():
@@ -43,4 +50,5 @@ async def on_ready():
     print('-'*30)
 
 #run the bot
+bot.loop.create_task(stay_awake())
 bot.run(TOKEN)
