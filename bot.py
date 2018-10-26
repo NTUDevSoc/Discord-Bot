@@ -25,5 +25,6 @@ async def on_ready():
     print('ID: ' + bot.user.id)
     print('-'*30)
 
+print("Hello :)")
 #run the bot
-bot.run(TOKEN)
+#bot.run(TOKEN)
