@@ -22,7 +22,7 @@ async def on_ready():
     print('-'*30)
     print('Logged in as:')
     print('Name: ' + bot.user.name)
-    print('ID: ' + bot.user.id)
+    print('ID: ' + str(bot.user.id))
     print('-'*30)
 
 #run the bot
