@@ -19,7 +19,7 @@ async def on_member_join(member):
 
 #Commands
 @bot.command()
-async def whois(channel, user:discord.Member=None):
+async def whois(ctx, user:discord.Member=None):
     if user:
         user_info = discord.Embed(title = "Name", description=user.name, color=user.color)
         user_info.set_thumbnail(url=user.avatar_url)
@@ -33,14 +33,18 @@ async def whois(channel, user:discord.Member=None):
             user_roles.append(user.roles[i].mention)
         user_info.add_field(name='Roles', value=', '.join(user_roles))
         user_info.set_footer(text='ID: ' + str(user.id))
-        await channel.send(embed=user_info)
+        await ctx.send(embed=user_info)
     else:
-        await channel.send('Please tag an user!')
+        await ctx.send('Please tag an user!')
 @whois.error
 async def whois_error(channel, error):
     if isinstance(error, discord.ext.commands.BadArgument):
         await channel.send('Please tag an user!')
 
+#Command that links to GitHub
+@bot.command()
+async def github(ctx):
+    await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
