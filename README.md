@@ -9,7 +9,7 @@ async def command(ctx, arg):
   await ctx.send(arg)
 ```
 * A command must always have at least one parameter, ctx, which is the [Context](https://discordpy.readthedocs.io/en/rewrite/ext/commands/api.html#discord.ext.commands.Context) as the first one.
-* The command is triggered using `prefix+command`. The current prefix it `.` so the command would be `.command`.
+* The command is triggered using `prefix+command`. The current prefix is `.` so the command would be `.command`.
 
 More on commands: [here](https://discordpy.readthedocs.io/en/rewrite/ext/commands/commands.html)
 
