@@ -4,7 +4,7 @@ A python Discord bot for the DevSoc server :) Just started working on it so goin
 ## Adding a command
 To add a command either do it in `commands.py` or make a new cog(class with its own listeners and commands):
 
-### Adding it in `commands.py`:
+### Adding it in commands.py:
 ```python
 @commands.command #Register the command with the bot.
 async def command(self, ctx, arg): #Define the command name.
