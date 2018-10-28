@@ -1,7 +1,7 @@
 #by Ram :)
 
 #imports
-import os, asyncio, discord
+import os,asyncio, discord
 from discord.ext import commands
 
 #global vars
@@ -9,7 +9,7 @@ TOKEN = os.environ['DISCORD_TOKEN']
 
 #set up bot object and cogs
 bot = commands.Bot(command_prefix='.')
-extensions = ['commands']
+extensions = ['cogs.commands']
 
 #EVENTS
 @bot.event
@@ -20,9 +20,9 @@ async def on_member_join(member):
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
     await bot.wait_until_ready()
-    while True:
+    while not bot.is_closed():
         print('Im awake :)')
-        await asyncio.sleep(1680)
+        await asyncio.sleep(1680) #runs every 28mins.
 
 #Load our extensions(cogs)
 if __name__ == "__main__":

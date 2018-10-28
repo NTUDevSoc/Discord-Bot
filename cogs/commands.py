@@ -30,7 +30,7 @@ class Commands:
             await channel.send('Please tag an user!')
 
     # Command that links to GitHub
-    @commands.command()
+    @commands.command(aliases=['GitHub', 'git', 'Github', 'gitHub', 'Git', 'source', 'sourcecode'])
     async def github(self, ctx):
         await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
 
