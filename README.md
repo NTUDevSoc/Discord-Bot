@@ -2,14 +2,37 @@
 A python Discord bot for the DevSoc server :) Just started working on it so going through many changes.
 
 ## Adding a command
-Adding a command follows this syntax:
+To add a command either do it in `commands.py` or make a new cog(class with its own listeners and commands):
+
+### Adding it in `commands.py`:
 ```python
-@bot.command
-async def command(ctx, arg):
-  await ctx.send(arg)
+@commands.command #Register the command with the bot.
+async def command(self, ctx, arg): #Define the command name.
+  await ctx.send(arg) #Execute the command. In this case we send the argument passed back to the user.
 ```
 * A command must always have at least one parameter, ctx, which is the [Context](https://discordpy.readthedocs.io/en/rewrite/ext/commands/api.html#discord.ext.commands.Context) as the first one.
 * The command is triggered using `prefix+command`. The current prefix is `.` so the command would be `.command`.
+
+### Making a new cog:
+* Make a new file or a class in `commands.py`
+* If making a new file don't forget this import:
+```python
+from discord.ext import commands
+```
+* Set up the cog, make sure it has __init__:
+```python
+class Cog_Name: #Setup the cog.
+  def __init__(self, bot):
+    self.bot = bot #If you don't have this the commands won't work as they won't be able to get ctx(context).
+```
+* Write your commands the same way as in `commands.py`
+* Don't forget to add this at the end:
+```python
+def setup(bot):
+  bot.add_cog(Cog_Name(bot))
+```
+* Add your cog to the extensions list in `bot.py`
+
 
 More on commands: [here](https://discordpy.readthedocs.io/en/rewrite/ext/commands/commands.html)
 
