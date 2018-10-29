@@ -7,7 +7,7 @@ class Commands:
     
     @commands.command()
     async def givemebasicrole(self, ctx):
-        role = discord.utils.get(member.guild.roles, name='DevSoc')
+        role = discord.utils.get(ctx.guild.roles, name='DevSoc')
         await ctx.author.add_roles(role)
         
     
