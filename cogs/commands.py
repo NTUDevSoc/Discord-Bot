@@ -4,16 +4,7 @@ from discord.ext import commands
 class Commands:
     def __init__(self, bot):
         self.bot = bot
-    
-    @commands.command()
-    async def give(self, ctx):
-        role = discord.utils.get(ctx.guild.roles, name='DevSoc')
-        try:
-            await ctx.author.add_roles(role)
-        except discord.Forbidden:
-            await ctx.send('ERROR: I don\'t have permission to set roles.')
         
-    
     @commands.command()
     async def whois(self, ctx, user: discord.Member = None):
         if user:
