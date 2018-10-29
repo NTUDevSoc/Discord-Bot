@@ -16,7 +16,7 @@ extensions = ['cogs.commands']
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name='DevSoc')
     try:
-        await member.author.add_roles(role)
+        await member.add_roles(role)
     except discord.Forbidden:
         await bot.send('ERROR: I don\'t have permission to set roles.')
 
