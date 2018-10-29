@@ -4,7 +4,13 @@ from discord.ext import commands
 class Commands:
     def __init__(self, bot):
         self.bot = bot
-
+    
+    @commands.command()
+    async def givemebasicrole(self, ctx):
+        role = discord.utils.get(member.guild.roles, name='DevSoc')
+        await ctx.author.add_roles(role)
+        
+    
     @commands.command()
     async def whois(self, ctx, user: discord.Member = None):
         if user:
