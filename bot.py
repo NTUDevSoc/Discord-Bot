@@ -14,7 +14,7 @@ extensions = ['cogs.commands']
 #EVENTS
 @bot.event
 async def on_member_join(member):
-    role = discord.utils.get(member.server.roles, name='DevSoc')
+    role = discord.utils.get(member.guild.roles, name='DevSoc')
     await bot.add_roles(member, role)
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
