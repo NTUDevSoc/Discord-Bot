@@ -15,7 +15,10 @@ extensions = ['cogs.commands']
 @bot.event
 async def on_member_join(member):
     role = discord.utils.get(member.guild.roles, name='DevSoc')
-    await member.add_roles(role)
+    try:
+        await member.author.add_roles(role)
+    except discord.Forbidden:
+        await bot.send('ERROR: I don\'t have permission to set roles.')
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():

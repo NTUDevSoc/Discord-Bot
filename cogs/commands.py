@@ -6,10 +6,12 @@ class Commands:
         self.bot = bot
     
     @commands.command()
-    async def givemebasicrole(self, ctx):
-        print(self.bot.manage_roles)
+    async def give(self, ctx):
         role = discord.utils.get(ctx.guild.roles, name='DevSoc')
-        await ctx.author.add_roles([role,])
+        try:
+            await ctx.author.add_roles(role)
+        except discord.Forbidden:
+            await ctx.send('ERROR: I don\'t have permission to set roles.')
         
     
     @commands.command()
