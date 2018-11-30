@@ -1,11 +1,17 @@
 import discord
+from cogs.poll_database import MysqlConnection
 from discord.ext import commands
+
+async def in_bot_commands(ctx):
+    print(ctx.channel.id)
+    return (ctx.channel.id == 186605768080883713) or (ctx.channel.id == 517651663729852416)
 
 class Commands:
     def __init__(self, bot):
         self.bot = bot
-        
+
     @commands.command()
+    @commands.check(in_bot_commands)
     async def whois(self, ctx, user: discord.Member = None):
         if user:
             user_info = discord.Embed(title="Name", description=user.name, color=user.color)
@@ -31,9 +37,9 @@ class Commands:
 
     # Command that links to GitHub
     @commands.command(aliases=['GitHub', 'git', 'Github', 'gitHub', 'Git', 'source', 'sourcecode'])
+    @commands.check(in_bot_commands)
     async def github(self, ctx):
         await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
-
 
 def setup(bot):
     bot.add_cog(Commands(bot))
