@@ -94,6 +94,7 @@ class Roles:
             self.role = 'Alumni'
         else:
             await ctx.send('Invalid role! For roles type .helproles')
+            return
 
         if placement.lower() in ('true', 'yes', 'si', 'da', 'taip', 'yup', 'eyup', 'ofc'):
             await ctx.author.add_roles(self.placement)
