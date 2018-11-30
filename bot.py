@@ -1,7 +1,7 @@
 #by Ram :)
 
 #imports
-import os,asyncio, discord
+import os, asyncio, discord
 from discord.ext import commands
 
 #global vars
@@ -9,7 +9,7 @@ TOKEN = os.environ['DISCORD_TOKEN']
 
 #set up bot object and cogs
 bot = commands.Bot(command_prefix='.')
-extensions = ['cogs.commands']
+extensions = ['cogs.commands', 'cogs.roles']
 
 #EVENTS
 @bot.event
@@ -32,8 +32,9 @@ if __name__ == "__main__":
     for extension in extensions:
         try:
             bot.load_extension(extension)
-        except:
+        except Exception as e:
             print('Failed to load extension ' + extension + '.')
+            print(e)
 
 @bot.event
 async def on_ready():
