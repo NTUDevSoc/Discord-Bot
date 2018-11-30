@@ -1,5 +1,4 @@
 import discord
-from cogs.poll_database import MysqlConnection
 from discord.ext import commands
 
 async def in_bot_commands(ctx):
