@@ -3,8 +3,8 @@ from cogs.poll_database import MysqlConnection
 from discord.ext import commands
 
 async def in_bot_commands(ctx):
-    print(ctx.channel.id)
-    return (ctx.channel.id == 186605768080883713) or (ctx.channel.id == 517651663729852416)
+    channel_ids = (186605768080883713, 517651663729852416, 505476463492071425)
+    return ctx.channel.id in channel_ids
 
 class Commands:
     def __init__(self, bot):
