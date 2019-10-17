@@ -47,3 +47,6 @@ async def on_ready():
 #run the bot
 bot.loop.create_task(stay_awake())
 bot.run(TOKEN)
+
+
+#testing hacktober pulls
