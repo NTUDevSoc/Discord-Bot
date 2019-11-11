@@ -27,12 +27,12 @@ class Commands:
             user_info.set_footer(text='ID: ' + str(user.id))
             await ctx.send(embed=user_info)
         else:
-            await ctx.send('Please tag an user!')
+            await ctx.send('Please tag a user!')
 
     @whois.error
     async def whois_error(self, channel, error):
         if isinstance(error, discord.ext.commands.BadArgument):
-            await channel.send('Please tag an user!')
+            await channel.send('Please tag a user!')
 
     # Command that links to GitHub
     @commands.command(aliases=['GitHub', 'git', 'Github', 'gitHub', 'Git', 'source', 'sourcecode'])
@@ -40,6 +40,17 @@ class Commands:
     async def github(self, ctx):
         await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
 
+    @commands.command(aliases=['Social', 'twitter', 'facebook', 'instagram', 'socialmedia'])
+    @commands.check(in_bot_commands)
+    async def social(self, ctx):
+        socials=discord.Embed(title="DevSoc Social Links", description="Here are all the links to official DevSoc Social Media pages", color=0xe7ec11)
+        socials.set_thumbnail(url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+        socials.add_field(name="Twitter", value="https://twitter.com/devsoc", inline=False)
+        socials.add_field(name="Facebook", value="https://facebook.com/devsoc", inline=False)
+        socials.add_field(name="Instagram", value="https://instagram.com/ntudevsoc", inline=False)
+        socials.set_footer(text="Bot developed by Ram/Sunglass")
+        await ctx.send(embed=socials)
+        
 def setup(bot):
     bot.add_cog(Commands(bot))
 
