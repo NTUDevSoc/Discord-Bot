@@ -38,7 +38,7 @@ class Roles:
 
     @commands.command()
     @commands.check(in_bot_commands)
-    async def helprole(self, ctx):
+    async def helproles(self, ctx):
         await ctx.send(
         '''
         To set your role please follow this:
