@@ -14,21 +14,12 @@ class Roles:
     @commands.check(in_bot_commands)
     async def setrole(self, ctx, *args):
         if len(args) == 0:
-            await ctx.send(
-            '''
-            To set your role please follow this:
-            .setrole <year> <if going/went to placement>
-            
-            example:
-            .setrole second no
-            .setrole placement (if your year is placement no need to answer second one)
-            .setrole alumni yes
-            .setrole first true
-            (if not going to placement year you can leave the second argument empty.)
-            
-            NOTE: It's NOT case sensitive.
-            If it's not working please type .helprole or @Ram.
-            ''')
+            roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
+            roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+            roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
+            roles.add_field(name="Placement options", value="Yes/No", inline=False)
+            roles.set_footer(text="Bot developed by Ram/Sunglass")
+            await ctx.send(embed=roles)
         elif len(args) == 1:
             await self.set_role(ctx, args[0])
         elif len(args) == 2:
@@ -38,7 +29,7 @@ class Roles:
 
     @commands.command()
     @commands.check(in_bot_commands)
-    async def helproles(self, ctx):
+    async def oghelproles(self, ctx):
         await ctx.send(
         '''
         To set your role please follow this:
@@ -57,6 +48,16 @@ class Roles:
         Yes - true, yes, si, da, taip, yup, eyup, ofc.
         No - anything or leave empty.
         ''')
+
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def helproles(self, ctx):
+        roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
+        roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+        roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
+        roles.add_field(name="Placement options", value="Yes/No", inline=False)
+        roles.set_footer(text="Bot developed by Ram/Sunglass")
+        await ctx.send(embed=roles)
 
     async def set_role(self, ctx, role, placement = ''):
         self.first_year = discord.utils.get(ctx.guild.roles, name='First Year')

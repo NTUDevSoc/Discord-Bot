@@ -16,7 +16,7 @@ class Commands:
     @commands.check(in_bot_commands)
     async def whois(self, ctx, user: discord.Member = None):
         if user:
-            user_info = discord.Embed(title="Name", description=user.name, color=user.color)
+            user_info = discord.Embed(title="Name", description=user.name, color=0xe7ec11)
             user_info.set_thumbnail(url=user.avatar_url)
             user_info.set_author(name=user.name + '#' + user.discriminator, icon_url=user.avatar_url)
             user_info.add_field(name='Nickname', value=user.nick)
@@ -41,7 +41,10 @@ class Commands:
     @commands.command(aliases=['GitHub', 'git', 'Github', 'gitHub', 'Git', 'source', 'sourcecode'])
     @commands.check(in_bot_commands)
     async def github(self, ctx):
-        await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
+        code=discord.Embed(title="Here is a link to the bot's source code", description="https://github.com/NTUDevSoc/Discord-Bot", color=0xe7ec11)
+        code.set_author(name="Discord Bot Source Code", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+        code.set_footer(text="Bot developed by Ram/Peter")
+        await ctx.send(embed=code)
 
     #Command that links to all DevSoc social pages
     @commands.command(aliases=['Social', 'socials', 'twitter', 'facebook', 'instagram', 'socialmedia'])
@@ -52,32 +55,9 @@ class Commands:
         socials.add_field(name="Twitter", value="https://twitter.com/devsoc", inline=False)
         socials.add_field(name="Facebook", value="https://facebook.com/devsoc", inline=False)
         socials.add_field(name="Instagram", value="https://instagram.com/ntudevsoc", inline=False)
-        socials.set_footer(text="Bot developed by Ram/Sunglass")
+        socials.set_footer(text="Bot developed by Ram/Peter")
         await ctx.send(embed=socials)
 
-    #Command to check bot uptime
-    @commands.command(aliases=['runtime', 'Uptime', 'stats'])
-    @commands.check(in_bot_commands)
-    async def uptime(self, ctx):
-        uptime = time.time() - startTime
-        if uptime < int(60):
-            uptime = round(uptime, 2)
-            await client.say("Bot has been online for "+str(uptime)+" seconds.")
-        elif int(60) < uptime < int(3600):
-            uptime = uptime / int(60)
-            uptime = round(uptime, 2)
-            await client.say("Bot has been online for "+str(uptime)+" minutes.")
-        elif int(3600) < uptime < int(86400):
-            uptime = uptime / int(60)
-            uptime = uptime / int(60)
-            uptime = round(uptime, 2)
-            await client.say("Bot has been online for "+str(uptime)+" hours.")
-        else:
-            uptime = uptime / int(60)
-            uptime = uptime / int(60)
-            uptime = uptime / int(24)
-            uptime = round(uptime, 2)
-            await client.say("Bot has been online for "+str(uptime)+" days.")
 
 def setup(bot):
     bot.add_cog(Commands(bot))
