@@ -40,7 +40,8 @@ class Commands:
     async def github(self, ctx):
         await ctx.send("You can find the source code on: https://github.com/NTUDevSoc/Discord-Bot")
 
-    @commands.command(aliases=['Social', 'twitter', 'facebook', 'instagram', 'socialmedia'])
+    #Command that links to all DevSoc social pages
+    @commands.command(aliases=['Social', 'socials', 'twitter', 'facebook', 'instagram', 'socialmedia'])
     @commands.check(in_bot_commands)
     async def social(self, ctx):
         socials=discord.Embed(title="DevSoc Social Links", description="Here are all the links to official DevSoc Social Media pages", color=0xe7ec11)
@@ -50,7 +51,31 @@ class Commands:
         socials.add_field(name="Instagram", value="https://instagram.com/ntudevsoc", inline=False)
         socials.set_footer(text="Bot developed by Ram/Sunglass")
         await ctx.send(embed=socials)
-        
+
+    #Command to check bot uptime
+    @commands.command(aliases=['runtime', 'Uptime', 'stats'])
+    @commands.check(in_bot_commands)
+    async def uptime(self, ctx):
+        uptime = time.time() - startTime
+        if uptime < int(60):
+            uptime = round(uptime, 2)
+            await client.say("Bot has been online for "+str(uptime)+" seconds.")
+        elif int(60) < uptime < int(3600):
+            uptime = uptime / int(60)
+            uptime = round(uptime, 2)
+            await client.say("Bot has been online for "+str(uptime)+" minutes.")
+        elif int(3600) < uptime < int(86400):
+            uptime = uptime / int(60)
+            uptime = uptime / int(60)
+            uptime = round(uptime, 2)
+            await client.say("Bot has been online for "+str(uptime)+" hours.")
+        else:
+            uptime = uptime / int(60)
+            uptime = uptime / int(60)
+            uptime = uptime / int(24)
+            uptime = round(uptime, 2)
+            await client.say("Bot has been online for "+str(uptime)+" days.")
+
 def setup(bot):
     bot.add_cog(Commands(bot))
 
