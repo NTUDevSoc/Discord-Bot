@@ -1,5 +1,8 @@
 import discord
+import time
+from datetime import datetime
 from discord.ext import commands
+startTime = time.time()
 
 async def in_bot_commands(ctx):
     channel_ids = (186605768080883713, 517651663729852416, 505476463492071425)
