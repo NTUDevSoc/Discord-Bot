@@ -96,8 +96,11 @@ class Roles:
         else:
             await ctx.send('Invalid role! For roles type .helproles')
             return
-
-        if placement.lower() in ('true', 'yes', 'si', 'da', 'taip', 'yup', 'eyup', 'ofc'):
+        if self.role = 'Placement Year':
+            if self.placement in ctx.author.roles:
+                await ctx.author.remove_roles(self.placement)
+            await ctx.send('Set role of: ' + self.role + '!') 
+        elif placement.lower() in ('true', 'yes', 'si', 'da', 'taip', 'yup', 'eyup', 'ofc'):
             await ctx.author.add_roles(self.placement)
             await ctx.send('Set role of: ' + self.role + '! With Placement.')
         else:
