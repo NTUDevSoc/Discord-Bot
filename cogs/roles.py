@@ -83,7 +83,6 @@ class Roles:
         elif role.lower() in ('placement', '3/4', '3/4ths', 'wtf', 'inbetween'):
             await ctx.author.remove_roles(self.first_year, self.second_year, self.third_year, self.fourth_year, self.alumni)
             await ctx.author.add_roles(self.placement_year)
-            await ctx.author.add_roles(self.placement)
             self.role = 'Placement Year'
         elif role.lower() in ('fourth', '4', '4th', 'four'):
             await ctx.author.remove_roles(self.first_year, self.second_year, self.third_year, self.placement_year, self.alumni)
@@ -96,7 +95,8 @@ class Roles:
         else:
             await ctx.send('Invalid role! For roles type .helproles')
             return
-        if self.role = 'Placement Year':
+
+        if self.role == 'Placement Year':
             if self.placement in ctx.author.roles:
                 await ctx.author.remove_roles(self.placement)
             await ctx.send('Set role of: ' + self.role + '!') 
