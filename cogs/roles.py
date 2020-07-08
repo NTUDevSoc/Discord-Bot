@@ -59,6 +59,18 @@ class Roles:
         roles.set_footer(text="Bot developed by Ram/Sunglass")
         await ctx.send(embed=roles)
 
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def announcement(self, ctx):
+        self.announcement = discord.utils.get(ctx.guild.roles, name='Announcement')
+        if self.announcement in ctx.author.roles:
+            await ctx.author.remove_roles(self.announcement)
+            await ctx.send('You have been removed from announcements.')
+        else:
+            await ctx.author.add_roles(self.announcement)
+            await ctx.send('You have been added to announcements.')
+        
+
     async def set_role(self, ctx, role, placement = ''):
         self.first_year = discord.utils.get(ctx.guild.roles, name='First Year')
         self.second_year = discord.utils.get(ctx.guild.roles, name='Second Year')
