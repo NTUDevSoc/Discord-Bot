@@ -8,7 +8,7 @@ async def in_bot_commands(ctx):
     channel_ids = (186605768080883713, 517651663729852416, 505476463492071425)
     return ctx.channel.id in channel_ids
 
-class Commands:
+class Commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
