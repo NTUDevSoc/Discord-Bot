@@ -18,7 +18,7 @@ class Roles(commands.Cog):
             roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
             roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
             roles.add_field(name="Placement options", value="Yes/No", inline=False)
-            roles.set_footer(text="Bot developed by Ram/Sunglass")
+            roles.set_footer(text="Bot developed by Emi/Sunglass")
             await ctx.send(embed=roles)
         elif len(args) == 1:
             await self.set_role(ctx, args[0])
@@ -56,7 +56,7 @@ class Roles(commands.Cog):
         roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
         roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
         roles.add_field(name="Placement options", value="Yes/No", inline=False)
-        roles.set_footer(text="Bot developed by Ram/Sunglass")
+        roles.set_footer(text="Bot developed by Emi/Sunglass")
         await ctx.send(embed=roles)
 
     @commands.command()
@@ -126,7 +126,7 @@ class Roles(commands.Cog):
             await asyncio.sleep(86400)
             print('Checking for role update!')
             self.today = datetime.datetime.today()
-            if (self.today.month == 9 and self.today.day == 24):
+            if (self.today.month == 9 and self.today.day == 21):
                 await self.update_roles()
 
     @commands.command()

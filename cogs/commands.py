@@ -43,7 +43,7 @@ class Commands(commands.Cog):
     async def github(self, ctx):
         code=discord.Embed(title="Here is a link to the bot's source code", description="https://github.com/NTUDevSoc/Discord-Bot", color=0xe7ec11)
         code.set_author(name="Discord Bot Source Code", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
-        code.set_footer(text="Bot developed by Ram/Peter")
+        code.set_footer(text="Bot developed by Emi/Peter")
         await ctx.send(embed=code)
 
     #Command that links to all DevSoc social pages
@@ -55,7 +55,7 @@ class Commands(commands.Cog):
         socials.add_field(name="Twitter", value="https://twitter.com/devsoc", inline=False)
         socials.add_field(name="Facebook", value="https://facebook.com/devsoc", inline=False)
         socials.add_field(name="Instagram", value="https://instagram.com/ntudevsoc", inline=False)
-        socials.set_footer(text="Bot developed by Ram/Peter")
+        socials.set_footer(text="Bot developed by Emi/Peter")
         await ctx.send(embed=socials)
 
 
