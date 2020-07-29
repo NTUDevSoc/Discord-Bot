@@ -27,14 +27,14 @@ async def stay_awake():
         print('Im awake :)')
         await asyncio.sleep(1680) #runs every 28mins.
 
-###Load our extensions(cogs)
-##if __name__ == "__main__":
-##    for extension in extensions:
-##        try:
-##            bot.load_extension(extension)
-##        except Exception as e:
-##            print('Failed to load extension ' + extension + '.')
-##            print(e)
+#Load our extensions(cogs)
+if __name__ == "__main__":
+    for extension in extensions:
+        try:
+            bot.load_extension(extension)
+        except Exception as e:
+            print('Failed to load extension ' + extension + '.')
+            print(e)
 
 @bot.event
 async def on_ready():
@@ -46,8 +46,6 @@ async def on_ready():
 
 #run the bot
 bot.loop.create_task(stay_awake())
-bot.load_extension("cogs.commands")
-bot.load_extension("cogs.roles")
 bot.run(TOKEN)
 
 
