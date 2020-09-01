@@ -120,21 +120,23 @@ class Roles(commands.Cog):
                 await ctx.author.remove_roles(self.placement)
             await ctx.send('Set role of: ' + self.role + '! Without Placement.')
 
-    async def check_day(self):
-        await self.bot.wait_until_ready()
-        while not self.bot.is_closed():
-            await asyncio.sleep(86400)
-            print('Checking for role update!')
-            self.today = datetime.datetime.today()
-            if (self.today.month == 9 and self.today.day == 21):
-                await self.update_roles()
+##    async def check_day(self):
+##        await self.bot.wait_until_ready()
+##        while not self.bot.is_closed():
+##            await asyncio.sleep(86400)
+##            print('Checking for role update!')
+##            self.today = datetime.datetime.today()
+##            if (self.today.month == 9 and self.today.day == 21):
+##                await self.update_roles()
 
     @commands.command()
-    @commands.is_owner()
     @commands.check(in_bot_commands)
     async def updateroles(self, ctx):
-        await self.update_roles()
-        await ctx.send('Manually updated roles!')
+        if ctx.author == "Sunglass#7273":
+            await self.update_roles()
+            await ctx.send('Manually updated roles!')
+        else:
+            await ctx.send('no')
 
     async def update_roles(self):
         for guild in self.bot.guilds:
