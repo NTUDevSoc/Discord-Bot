@@ -8,7 +8,7 @@ async def in_bot_commands(ctx):
 class Roles(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.bot.loop.create_task(self.check_day())
+##        self.bot.loop.create_task(self.check_day())
 
     @commands.command()
     @commands.check(in_bot_commands)
