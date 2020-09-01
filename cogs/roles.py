@@ -132,7 +132,7 @@ class Roles(commands.Cog):
     @commands.command()
     @commands.check(in_bot_commands)
     async def updateroles(self, ctx):
-        if ctx.author == "Sunglass#7273":
+        if str(ctx.author.id) == "280439222358245377":
             await self.update_roles()
             await ctx.send('Manually updated roles!')
         else:
