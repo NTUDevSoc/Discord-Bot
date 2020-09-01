@@ -131,12 +131,10 @@ class Roles(commands.Cog):
 
     @commands.command()
     @commands.check(in_bot_commands)
+    @commands.is_owner()
     async def updateroles(self, ctx):
-        if ctx.author.id == "280439222358245377":
-            await self.update_roles()
-            await ctx.send('Manually updated roles!')
-        else:
-            await ctx.send('no')
+        await self.update_roles()
+        await ctx.send('Manually updated roles!')
 
     async def update_roles(self):
         for guild in self.bot.guilds:
