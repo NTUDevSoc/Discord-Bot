@@ -20,6 +20,13 @@ async def on_member_join(member):
     except discord.Forbidden:
         await bot.send('ERROR: I don\'t have permission to set roles.')
 
+@bot.event
+async def on_message(message):
+    if "testingphrase344" in message.content:
+        await bot.delete_message(message)
+    elif "D3vS0cRul3zn0HUm@N5all0wed1n" in message.content:
+        await bot.delete_message(message)
+
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
     await bot.wait_until_ready()
