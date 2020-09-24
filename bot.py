@@ -22,7 +22,7 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
-    await client.process_commands(message)
+    await bot.process_commands(message)
     if "testingphrase344" in message.content:
         await message.delete()
     elif "D3vS0cRul3zn0HUm@N5all0wed1n" in message.content:
