@@ -25,7 +25,7 @@ async def on_message(message):
     await bot.process_commands(message)
     if "testingphrase344" in message.content:
         await message.delete()
-    elif "D3vS0cRul3zn0HUm@N5all0wed1n" in message.content:
+    elif "D3vS0cRul3z?N0P3.n0_0neall0wed1n" in message.content:
         await message.delete()
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
