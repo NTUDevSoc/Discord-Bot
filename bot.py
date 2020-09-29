@@ -21,11 +21,15 @@ extensions = ['cogs.commands', 'cogs.roles']
 @bot.event
 async def on_member_join(member):
     print(member)
-    role = discord.utils.get(guild.roles, name='DevSoc')
-    role2 = discord.utils.get(guild.roles, name='Announcement')
+    role = discord.utils.get(member.guild.roles, name='DevSoc')
+    print("devsoc role found")
+    role2 = discord.utils.get(member.guild.roles, name='Announcement')
+    print("annouuncemt role found")
     try:
         await member.add_roles(role)
+        print("added role 1")
         await member.add_roles(role2)
+        print("added role 2")
     except discord.Forbidden:
         await bot.send('ERROR: I don\'t have permission to set roles.')
 
