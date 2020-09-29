@@ -21,8 +21,8 @@ extensions = ['cogs.commands', 'cogs.roles']
 @bot.event
 async def on_member_join(member):
     print(member)
-    role = discord.utils.get(member.guild.roles, name='DevSoc')
-    role2 = discord.utils.get(member.guild.roles, name='Announcement')
+    role = discord.utils.get(guild.roles, name='DevSoc')
+    role2 = discord.utils.get(guild.roles, name='Announcement')
     try:
         await member.add_roles(role)
         await member.add_roles(role2)
