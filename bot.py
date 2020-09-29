@@ -1,23 +1,30 @@
-#by Ram :)
+#by Emi/Sunglass :)
 
 #imports
 import os, asyncio, discord
 from discord.ext import commands
 
+#New discord intents system
+intents = discord.Intents()
+intents.members = True
+intents.typing = True
+intents.presences = True
+
 #global vars
 TOKEN = os.environ['DISCORD_TOKEN']
 
 #set up bot object and cogs
-bot = commands.Bot(command_prefix='.')
+bot = commands.Bot(command_prefix='.', intents=intents)
 extensions = ['cogs.commands', 'cogs.roles']
 
 #EVENTS
 @bot.event
 async def on_member_join(member):
-    print("MEMBER JOIN LOGGED")
     role = discord.utils.get(member.guild.roles, name='DevSoc')
+    role2 = discord.utils.get(member.guild.roles, name='Announcement')
     try:
         await member.add_roles(role)
+        await member.add_roles(role2)
     except discord.Forbidden:
         await bot.send('ERROR: I don\'t have permission to set roles.')
 
