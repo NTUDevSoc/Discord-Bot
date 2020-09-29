@@ -14,6 +14,7 @@ extensions = ['cogs.commands', 'cogs.roles']
 #EVENTS
 @bot.event
 async def on_member_join(member):
+    print("MEMBER JOIN LOGGED")
     role = discord.utils.get(member.guild.roles, name='DevSoc')
     try:
         await member.add_roles(role)
