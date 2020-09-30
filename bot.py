@@ -1,14 +1,17 @@
 #by Emi/Sunglass :)
 
 #imports
-import os, asyncio, discord
+import os, asyncio
+import discord
 from discord.ext import commands
 
 #New discord intents system
-intents = discord.Intents()
+intents = discord.Intents.default()
 intents.members = True
 intents.typing = True
 intents.presences = True
+intents.messages = True
+intents.guilds = True
 
 #global vars
 TOKEN = os.environ['DISCORD_TOKEN']
