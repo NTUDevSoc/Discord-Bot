@@ -15,10 +15,10 @@ class Roles(commands.Cog):
     async def setrole(self, ctx, *args):
         if len(args) == 0:
             roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
-            roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+            roles.set_author(name="Set Role Command - Info", icon_url="https://i.imgur.com/NhVjX8S.png")
             roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
             roles.add_field(name="Placement options", value="Yes/No", inline=False)
-            roles.set_footer(text="Bot developed by Emi/Sunglass")
+            roles.set_footer(text="Bot developed by Emi/Peter")
             await ctx.send(embed=roles)
         elif len(args) == 1:
             await self.set_role(ctx, args[0])
@@ -53,10 +53,10 @@ class Roles(commands.Cog):
     @commands.check(in_bot_commands)
     async def helproles(self, ctx):
         roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
-        roles.set_author(name="Set Role Command - Info", icon_url="https://pbs.twimg.com/profile_images/895052854788071425/3To9GJza_400x400.jpg")
+        roles.set_author(name="Set Role Command - Info", icon_url="https://i.imgur.com/NhVjX8S.png")
         roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
         roles.add_field(name="Placement options", value="Yes/No", inline=False)
-        roles.set_footer(text="Bot developed by Emi/Sunglass")
+        roles.set_footer(text="Bot developed by Emi/Peter")
         await ctx.send(embed=roles)
 
     @commands.command()
