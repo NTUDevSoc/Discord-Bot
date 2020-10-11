@@ -74,7 +74,7 @@ class Commands(commands.Cog):
     @commands.check(in_bot_commands)
     async def fullchannelmute(self, ctx):
         if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032":
-            channel = ctx.message.author.voicechannel
+            channel = ctx.message.author.voice.channel
             for member in channel.members:
                 member.edit(mute=True)
             await ctx.send('Channel members muted!')
