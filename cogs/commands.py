@@ -70,6 +70,18 @@ class Commands(commands.Cog):
         thehelp.set_footer(text="Bot created by Emi/Peter")
         await ctx.send(embed=thehelp)
 
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def fullchannelmute(self, ctx):
+        if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032":
+            channel = ctx.message.author.voicechannel
+            for member in channel.members:
+                member.edit(mute=True)
+            await ctx.send('Channel members muted!')
+        else:
+            await ctx.send('not 4 u')
+    
+
 
 def setup(bot):
     bot.add_cog(Commands(bot))
