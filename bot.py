@@ -36,7 +36,7 @@ async def on_member_join(member):
 async def on_message(message):
     await bot.process_commands(message)
     if "hannah" in message.content:
-        await bot.send('<@!131332703919276032>, PING)
+        await bot.send("<@!131332703919276032>, PING")
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
