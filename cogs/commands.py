@@ -72,7 +72,7 @@ class Commands(commands.Cog):
 
     @commands.command()
     @commands.check(in_bot_commands)
-    async def fullchannelmute(self, ctx):
+    async def channelmute(self, ctx):
         if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032":
             channel = ctx.message.author.voice.channel
             for member in channel.members:
@@ -81,6 +81,16 @@ class Commands(commands.Cog):
         else:
             await ctx.send('not 4 u')
     
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def channelunmute(self, ctx):
+        if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032":
+            channel = ctx.message.author.voice.channel
+            for member in channel.members:
+                await member.edit(mute=False)
+            await ctx.send('Channel members unmuted!')
+        else:
+            await ctx.send('not 4 u')
 
 
 def setup(bot):
