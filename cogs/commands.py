@@ -76,7 +76,7 @@ class Commands(commands.Cog):
         if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032":
             channel = ctx.message.author.voice.channel
             for member in channel.members:
-                member.edit(mute=True)
+                await member.edit(mute=True)
             await ctx.send('Channel members muted!')
         else:
             await ctx.send('not 4 u')
