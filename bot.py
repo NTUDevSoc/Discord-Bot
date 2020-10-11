@@ -36,7 +36,7 @@ async def on_member_join(member):
 async def on_message(message):
     await bot.process_commands(message)
     if "hannah" in message.content:
-        user = ctx.guild.get_member(131332703919276032)
+        user = message.guild.get_member(131332703919276032)
         await bot.send(f'{user.mention} PING')
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
