@@ -34,7 +34,13 @@ async def on_member_join(member):
 
 @bot.event
 async def on_message(message):
+    if message.author == bot.user:
+        return
+    if message.author.bot == True:
+        return
     await bot.process_commands(message)
+    if "hannah" in message.content.lower():
+        await message.channel.send('<@!131332703919276032> sus')
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
