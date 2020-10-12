@@ -95,7 +95,7 @@ class Commands(commands.Cog):
 
     @commands.command(aliases=['membercount', 'membercheck', 'memberlist'])
     @commands.check(in_bot_commands)
-    async def members(ctx):
+    async def members(self, ctx):
     firstcount = 0
     secondcount = 0
     placecount = 0
