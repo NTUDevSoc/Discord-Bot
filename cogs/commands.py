@@ -67,6 +67,7 @@ class Commands(commands.Cog):
         thehelp.add_field(name=".social", value="Links to all of DevSoc's social pages.", inline=False)
         thehelp.add_field(name=".whois", value="Check who someone in the server is.", inline=False)
         thehelp.add_field(name=".github", value="Links to the github source code of the bot.", inline=False)
+        thehelp.add_field(name=".members", value="Checks the members of each year group in the server.", inline=False)
         thehelp.set_footer(text="Bot created by Emi/Peter")
         await ctx.send(embed=thehelp)
 
@@ -91,6 +92,39 @@ class Commands(commands.Cog):
             await ctx.send('Channel members unmuted!')
         else:
             await ctx.send('not 4 u')
+
+    @commands.command(aliases=['membercount', 'membercheck', 'memberlist'])
+    @commands.check(in_bot_commands)
+    async def members(ctx):
+    firstcount = 0
+    secondcount = 0
+    placecount = 0
+    finalcount = 0
+    alumcount = 0
+    guild = ctx.message.guild
+    for member in guild.members:
+        for role in member.roles:
+            if role.name == "First Year":
+                firstcount = firstcount + 1
+            elif role.name == "Second Year":
+                secondcount = secondcount + 1
+            elif role.name == "Placement Year":
+                placecount = placecount + 1
+            elif role.name == "Third Year":
+                finalcount = finalcount + 1
+            elif role.name == "Fourth Year":
+                finalcount = finalcount + 1
+            elif role.name == "Alumni":
+                alumcount = alumcount + 1
+    count=discord.Embed(title="__DevSoc Members__", description="*Here are the members of each year group within this server.*", color=0xe7ec11)
+    count.add_field(name="First Year", value=str(firstcount)+" members", inline=False)
+    count.add_field(name="Second Year", value=str(secondcount)+" members", inline=False)
+    count.add_field(name="Placement Year", value=str(placecount)+" members", inline=False)
+    count.add_field(name="Third/Final Year", value=str(finalcount)+" members", inline=False)
+    count.add_field(name="Alumni", value=str(alumcount)+" members", inline=False)
+    count.set_footer(text="Bot created by Emi/Peter")
+    await ctx.send(embed=count)
+        
 
 
 def setup(bot):
