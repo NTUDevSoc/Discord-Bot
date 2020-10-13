@@ -1,2 +1,3 @@
 git+https://github.com/Rapptz/discord.py
 mysql-connector
+requests==2.24.0
