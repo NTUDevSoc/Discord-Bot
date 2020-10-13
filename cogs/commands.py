@@ -68,9 +68,12 @@ class Commands(commands.Cog):
         thehelp.add_field(name=".whois", value="Check who someone in the server is.", inline=False)
         thehelp.add_field(name=".github", value="Links to the github source code of the bot.", inline=False)
         thehelp.add_field(name=".members", value="Checks the members of each year group in the server.", inline=False)
+        thehelp.add_field(name=".covidoverview", value="Gives an overview of UK COVID cases.", inline=False)
+        thehelp.add_field(name=".covidregion (REGION)", value="Gives an overview of COVID cases in a region of the UK.", inline=False)
         thehelp.set_footer(text="Bot created by Emi/Peter")
         await ctx.send(embed=thehelp)
 
+    #Command to mute all users in your current voice channel
     @commands.command()
     @commands.check(in_bot_commands)
     async def channelmute(self, ctx):
@@ -81,7 +84,8 @@ class Commands(commands.Cog):
             await ctx.send('Channel members muted!')
         else:
             await ctx.send('not 4 u')
-    
+
+    #Command to unmute all users in your current voice channel
     @commands.command()
     @commands.check(in_bot_commands)
     async def channelunmute(self, ctx):
@@ -93,6 +97,7 @@ class Commands(commands.Cog):
         else:
             await ctx.send('not 4 u')
 
+    #Command to count members in each year in the server
     @commands.command(aliases=['membercount', 'membercheck', 'memberlist'])
     @commands.check(in_bot_commands)
     async def members(self, ctx):
@@ -124,6 +129,77 @@ class Commands(commands.Cog):
         count.add_field(name="Alumni", value=str(alumcount)+" members", inline=False)
         count.set_footer(text="Bot created by Emi/Peter")
         await ctx.send(embed=count)
+
+    #COVID Statistics Command
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def covidoverview(self, ctx):
+        ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+        AREA_TYPE = "overview"
+        filters = [
+            f"areaType={ AREA_TYPE }",
+        ]
+        structure = {
+            "cases": {
+                "daily": "newCasesByPublishDate",
+                "cumulative": "cumCasesByPublishDate"
+            },
+        }
+        api_params = {
+            "filters": str.join(";", filters),
+            "structure": dumps(structure, separators=(",", ":")),
+            "latestBy": "cumCasesByPublishDate",
+        }
+        api_params["format"] = "json"
+        response = get(ENDPOINT, params=api_params, timeout=10)
+        assert response.status_code == 200, f"Failed request: {response.text}"
+        data = response.content
+        thedata = json.loads(data)
+        totalcases = int(thedata['data'][0]['cases']['cumulative'])
+        dailycases = int(thedata['data'][0]['cases']['daily'])
+        covid=discord.Embed(title="__COVID Dashboard__", description="UK Government COVID Statistics", color=0xe7ec11)
+        covid.add_field(name="Total Cases", value=totalcases, inline=False)
+        covid.add_field(name="Daily Cases", value=dailycases, inline=False)
+        await ctx.send(embed=covid)
+
+
+    #COVID Regional Statistics Command
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def covidregion(self, ctx, *region):
+        try:
+            region =  ' '.join(region)
+            ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
+            AREA_TYPE = "utla"
+            AREA_NAME = str(region.lower())
+            filters = [
+                f"areaType={ AREA_TYPE }",
+                f"areaName={ AREA_NAME }"
+            ]
+            structure = {
+                "cases": {
+                    "daily": "newCasesByPublishDate",
+                    "cumulative": "cumCasesByPublishDate"
+                },
+            }
+            api_params = {
+                "filters": str.join(";", filters),
+                "structure": dumps(structure, separators=(",", ":")),
+                "latestBy": "cumCasesByPublishDate",
+            }
+            api_params["format"] = "json"
+            response = get(ENDPOINT, params=api_params, timeout=10)
+            assert response.status_code == 200, f"Failed request: {response.text}"
+            data = response.content
+            thedata = json.loads(data)
+            totalcases = int(thedata['data'][0]['cases']['cumulative'])
+            dailycases = int(thedata['data'][0]['cases']['daily'])
+            covid=discord.Embed(title="__COVID Dashboard - "+str(region)+"__", description=str(region)+" COVID Statistics", color=0xe7ec11)
+            covid.add_field(name="Region Cases", value=totalcases, inline=False)
+            covid.add_field(name="Region Daily Cases", value=dailycases, inline=False)
+            await ctx.send(embed=covid)
+        except:
+            await ctx.send("That's not a valid region!")
         
 
 
