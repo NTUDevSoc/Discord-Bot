@@ -131,8 +131,9 @@ class Commands(commands.Cog):
         await ctx.send(embed=count)
 
     #COVID Statistics Command
-    @client.command(pass_context=True)
-    async def covidoverview(ctx):
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def covidoverview(self, ctx):
         ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
         AREA_TYPE = "overview"
         filters = [
@@ -163,8 +164,9 @@ class Commands(commands.Cog):
 
 
     #COVID Regional Statistics Command
-    @client.command(pass_context=True)
-    async def covidregion(ctx, *region):
+    @commands.command()
+    @commands.check(in_bot_commands)
+    async def covidregion(self, ctx, *region):
         try:
             region =  ' '.join(region)
             ENDPOINT = "https://api.coronavirus.data.gov.uk/v1/data"
