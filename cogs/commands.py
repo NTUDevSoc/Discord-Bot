@@ -2,6 +2,8 @@ import discord
 import time
 import json
 from json import dumps
+import requests
+from requests import get
 from datetime import datetime
 from discord.ext import commands
 startTime = time.time()
@@ -153,7 +155,7 @@ class Commands(commands.Cog):
             "latestBy": "cumCasesByPublishDate",
         }
         api_params["format"] = "json"
-        response = get(ENDPOINT, params=api_params, timeout=10)
+        response = requests.get(ENDPOINT, params=api_params, timeout=10)
         assert response.status_code == 200, f"Failed request: {response.text}"
         data = response.content
         thedata = json.loads(data)
@@ -190,7 +192,7 @@ class Commands(commands.Cog):
                 "latestBy": "cumCasesByPublishDate",
             }
             api_params["format"] = "json"
-            response = get(ENDPOINT, params=api_params, timeout=10)
+            response = requests.get(ENDPOINT, params=api_params, timeout=10)
             assert response.status_code == 200, f"Failed request: {response.text}"
             data = response.content
             thedata = json.loads(data)
