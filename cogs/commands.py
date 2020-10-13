@@ -147,7 +147,7 @@ class Commands(commands.Cog):
         }
         api_params = {
             "filters": str.join(";", filters),
-            "structure": dumps(structure, separators=(",", ":")),
+            "structure": json.dumps(structure, separators=(",", ":")),
             "latestBy": "cumCasesByPublishDate",
         }
         api_params["format"] = "json"
@@ -184,7 +184,7 @@ class Commands(commands.Cog):
             }
             api_params = {
                 "filters": str.join(";", filters),
-                "structure": dumps(structure, separators=(",", ":")),
+                "structure": json.dumps(structure, separators=(",", ":")),
                 "latestBy": "cumCasesByPublishDate",
             }
             api_params["format"] = "json"
