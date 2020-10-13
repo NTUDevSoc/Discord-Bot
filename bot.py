@@ -4,6 +4,9 @@
 import os, asyncio
 import discord
 from discord.ext import commands
+import json
+from json import dumps
+import re
 
 #New discord intents system
 intents = discord.Intents.default()
