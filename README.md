@@ -1,5 +1,9 @@
-# DevSoc Bot
-The DevSoc discord server's python bot. Created by Emi. Maintained by Peter.
+# DevSoc Discord Bot
+A repository containing the DevSoc discord server's python bot.
+
+Originally Created by Emi.
+
+Maintained/updated by [@petelampy](https://github.com/petelampy)
 
 ## Adding a command
 To add a command either do it in `commands.py` or make a new cog(class with its own listeners and commands):
