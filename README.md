@@ -46,4 +46,4 @@ The documentation for the API can be found [here](https://discordpy.readthedocs.
 
 ## Requirements
 * [Python 3.6.7](https://www.python.org/downloads/release/python-367/)
-* [discord.py[voice]](https://github.com/Rapptz/discord.py/tree/rewrite)
+* [discord.py](https://github.com/Rapptz/discord.py)
