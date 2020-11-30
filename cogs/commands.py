@@ -245,3 +245,5 @@ class Commands(commands.Cog):
 def setup(bot):
     bot.add_cog(Commands(bot))
 
+#Timer variable for advent of code command
+bot.adventCodeTimer = 0
