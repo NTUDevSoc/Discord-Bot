@@ -207,7 +207,7 @@ class Commands(commands.Cog):
 
     #Advent of Code Leaderboard
     @commands.command()
-    async def adventofcode(ctx):
+    async def adventofcode(self, ctx):
         adventCodeTimer = bot.adventCodeTimer
         timePassed = 0
         if adventCodeTimer == 0:
