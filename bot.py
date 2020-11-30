@@ -69,9 +69,10 @@ async def on_ready():
     print('ID: ' + str(bot.user.id))
     print('-'*30)
 
+#Timer variable for advent of code command
+bot.adventCodeTimer = 0
+
 #run the bot
 bot.loop.create_task(stay_awake())
 bot.run(TOKEN)
 
-
-#testing hacktober pulls

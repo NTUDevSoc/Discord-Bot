@@ -204,7 +204,42 @@ class Commands(commands.Cog):
             await ctx.send(embed=covid)
         except:
             await ctx.send("That's not a valid region!")
-        
+
+    #Advent of Code Leaderboard
+    @client.command(pass_context=True)
+    async def adventofcode(ctx):
+        adventCodeTimer = bot.adventCodeTimer
+        timePassed = 0
+        if adventCodeTimer == 0:
+            adventCodeTimer = datetime.datetime.now()
+            timePassed = 15
+        else:
+            difference = datetime.datetime.now() - adventCodeTimer
+            timePassed = divmod(difference.days * 86400 + difference.seconds, 60)
+            timePassed = timePassed[0]
+        if timePassed < 15:
+            await ctx.send("You can only view the scoreboard every 15 minutes!")
+        else:
+            adventCodeTimer = datetime.datetime.now()
+            sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
+            cookies = {'session': sessionValue}
+            response = get("https://adventofcode.com/2020/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
+            assert response.status_code == 200, f"Failed request: {response.text}"
+            data = response.content
+            adventScores = json.loads(data)
+            dataArray = []
+            for member in adventScores["members"]:
+                userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["global_score"]))
+                dataArray.append(userTuple)
+            dataArray.sort(key=lambda tup: tup[1])
+            advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
+            theScores = ""
+            for x in dataArray:
+                username = x[0]
+                score = x[1]
+                theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
+            advent.add_field(name="Scores", value=theScores, inline=False)
+            await ctx.send(embed=advent)
 
 
 def setup(bot):
