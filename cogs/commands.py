@@ -206,7 +206,7 @@ class Commands(commands.Cog):
             await ctx.send("That's not a valid region!")
 
     #Advent of Code Leaderboard
-    @client.command(pass_context=True)
+    @commands.command()
     async def adventofcode(ctx):
         adventCodeTimer = bot.adventCodeTimer
         timePassed = 0
