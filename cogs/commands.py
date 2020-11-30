@@ -208,7 +208,7 @@ class Commands(commands.Cog):
     #Advent of Code Leaderboard
     @commands.command()
     async def adventofcode(self, ctx):
-        adventCodeTimer = bot.adventCodeTimer
+        global adventCodeTimer
         timePassed = 0
         if adventCodeTimer == 0:
             adventCodeTimer = datetime.datetime.now()
@@ -246,4 +246,4 @@ def setup(bot):
     bot.add_cog(Commands(bot))
 
 #Timer variable for advent of code command
-bot.adventCodeTimer = 0
+adventCodeTimer = 0
