@@ -217,8 +217,16 @@ class Commands(commands.Cog):
             difference = datetime.datetime.now() - adventCodeTimer
             timePassed = divmod(difference.days * 86400 + difference.seconds, 60)
             timePassed = timePassed[0]
-        if timePassed < 15:
-            await ctx.send("You can only view the scoreboard every 15 minutes!")
+        global adventCache
+        if timePassed < 15 and len(adventCache) > 0:
+            theScores = ""
+            for x in adventCache:
+                username = x[0]
+                score = x[1]
+                theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
+            advent.add_field(name="Scores", value=theScores, inline=False)
+            advent.set_footer(text="Data may be 15 minutes old")
+            await ctx.send(embed=advent)
         else:
             adventCodeTimer = datetime.datetime.now()
             sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
@@ -232,6 +240,7 @@ class Commands(commands.Cog):
                 userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["global_score"]))
                 dataArray.append(userTuple)
             dataArray.sort(key=lambda tup: tup[1])
+            adventCache = dataArray
             advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
             theScores = ""
             for x in dataArray:
@@ -247,3 +256,5 @@ def setup(bot):
 
 #Timer variable for advent of code command
 adventCodeTimer = 0
+#Advent code cached data
+adventCache = []
