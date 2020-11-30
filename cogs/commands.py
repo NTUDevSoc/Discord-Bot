@@ -4,7 +4,7 @@ import json
 from json import dumps
 import requests
 from requests import get
-from datetime import datetime
+import datetime
 from discord.ext import commands
 startTime = time.time()
 
