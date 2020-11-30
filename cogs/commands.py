@@ -219,6 +219,7 @@ class Commands(commands.Cog):
             timePassed = timePassed[0]
         global adventCache
         if timePassed < 15 and len(adventCache) > 0:
+            advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
             theScores = ""
             for x in adventCache:
                 username = x[0]
