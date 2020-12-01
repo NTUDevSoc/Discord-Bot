@@ -47,8 +47,8 @@ async def on_message(message):
 
 @bot.event
 async def on_member_join(member):
-    arrivalsChannel = bot.get_channel("783388268631818280")
-    botChannel = bot.get_channel("517651663729852416")
+    arrivalsChannel = bot.get_channel(783388268631818280)
+    botChannel = bot.get_channel(517651663729852416)
     await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+botChannel.mention+" to set a yeargroup role using .setrole and access the rest of the server.")
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
