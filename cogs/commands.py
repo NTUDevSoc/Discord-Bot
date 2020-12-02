@@ -238,7 +238,7 @@ class Commands(commands.Cog):
             adventScores = json.loads(data)
             dataArray = []
             for member in adventScores["members"]:
-                userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["global_score"]))
+                userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["local_score"]))
                 dataArray.append(userTuple)
             dataArray.sort(key=lambda tup: tup[1])
             adventCache = dataArray
