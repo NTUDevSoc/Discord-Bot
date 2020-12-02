@@ -267,7 +267,7 @@ class Commands(commands.Cog):
             adventCache = json.loads(data)
         dataArray = []
         for member in adventCache["members"]:
-            stars = len(adventCache["members"][member]["name"]["completion_day_level"][str(day)])
+            stars = len(adventCache["members"][member]["completion_day_level"][str(day)])
             userTuple = (adventCache["members"][member]["name"], stars)
             dataArray.append(userTuple)
         dataArray.sort(key=lambda tup: tup[1], reverse=True)
