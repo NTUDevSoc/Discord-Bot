@@ -240,7 +240,7 @@ class Commands(commands.Cog):
             for member in adventScores["members"]:
                 userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["local_score"]))
                 dataArray.append(userTuple)
-            dataArray.sort(key=lambda tup: tup[1])
+            dataArray.sort(key=lambda tup: tup[1], reverse=True)
             adventCache = dataArray
             advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
             theScores = ""
