@@ -230,7 +230,7 @@ class Commands(commands.Cog):
             adventCache = json.loads(data)
         dataArray = []
         for member in adventCache["members"]:
-            userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["local_score"]))
+            userTuple = (adventCache["members"][member]["name"], int(adventCache["members"][member]["local_score"]))
             dataArray.append(userTuple)
         dataArray.sort(key=lambda tup: tup[1], reverse=True)
         advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
@@ -268,9 +268,9 @@ class Commands(commands.Cog):
         dataArray = []
         for member in adventCache["members"]:
             counter = 0
-            for x in adventScores["members"][member]["name"]["completion_day_level"][day]:
+            for x in adventCache["members"][member]["name"]["completion_day_level"][day]:
                 counter += 1
-            userTuple = (adventScores["members"][member]["name"], counter)
+            userTuple = (adventCache["members"][member]["name"], counter)
             dataArray.append(userTuple)
         dataArray.sort(key=lambda tup: tup[1], reverse=True)
         advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
