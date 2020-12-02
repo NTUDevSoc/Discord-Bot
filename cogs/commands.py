@@ -245,43 +245,49 @@ class Commands(commands.Cog):
 
     @commands.command()
     async def adventstars(self, ctx, day):
-        global adventCodeTimer
-        global adventCache
-        timePassed = 0
-        if adventCodeTimer == 0:
-            adventCodeTimer = datetime.datetime.now()
-            timePassed = 15
-        else:
-            difference = datetime.datetime.now() - adventCodeTimer
-            timePassed = divmod(difference.days * 86400 + difference.seconds, 60)
-            timePassed = timePassed[0]
-        if timePassed < 15 and len(adventCache) > 0:
-            pass
-        else:
-            adventCodeTimer = datetime.datetime.now()
-            sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
-            cookies = {'session': sessionValue}
-            response = get("https://adventofcode.com/2020/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
-            assert response.status_code == 200, f"Failed request: {response.text}"
-            data = response.content
-            adventCache = json.loads(data)
-        dataArray = []
-        for member in adventCache["members"]:
-            counter = 0
-            for x in adventCache["members"][member]["completion_day_level"][str(day)]:
-                counter += 1
-            userTuple = (adventCache["members"][member]["name"], counter)
-            dataArray.append(userTuple)
-        dataArray.sort(key=lambda tup: tup[1], reverse=True)
-        advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
-        theStars = ""
-        for x in dataArray:
-            username = x[0]
-            stars = x[1]
-            theStars = theStars + "**"+str(username)+"**: "+str(stars)+"\n"
-        advent.add_field(name="Stars", value=theStars, inline=False)
-        advent.set_footer(text="Data may be 15 minutes old")
-        await ctx.send(embed=advent)
+        try: 
+            int(day)
+            global adventCodeTimer
+            global adventCache
+            timePassed = 0
+            if adventCodeTimer == 0:
+                adventCodeTimer = datetime.datetime.now()
+                timePassed = 15
+            else:
+                difference = datetime.datetime.now() - adventCodeTimer
+                timePassed = divmod(difference.days * 86400 + difference.seconds, 60)
+                timePassed = timePassed[0]
+            if timePassed < 15 and len(adventCache) > 0:
+                pass
+            else:
+                adventCodeTimer = datetime.datetime.now()
+                sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
+                cookies = {'session': sessionValue}
+                response = get("https://adventofcode.com/2020/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
+                assert response.status_code == 200, f"Failed request: {response.text}"
+                data = response.content
+                adventCache = json.loads(data)
+            dataArray = []
+            for member in adventCache["members"]:
+                stars = 0
+                try:
+                    stars = len(adventCache["members"][member]["completion_day_level"][str(day)])
+                except KeyError:
+                    stars = 0
+                userTuple = (adventCache["members"][member]["name"], stars)
+                dataArray.append(userTuple)
+            dataArray.sort(key=lambda tup: tup[1], reverse=True)
+            advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
+            theStars = ""
+            for x in dataArray:
+                username = x[0]
+                stars = x[1]
+                theStars = theStars + "**"+str(username)+"**: "+str(stars)+"\n"
+            advent.add_field(name="Stars", value=theStars, inline=False)
+            advent.set_footer(text="Data may be 15 minutes old")
+            await ctx.send(embed=advent)
+        except ValueError:
+            await ctx.send("That's not a valid day!")
 
 
 
