@@ -219,15 +219,7 @@ class Commands(commands.Cog):
             timePassed = timePassed[0]
         global adventCache
         if timePassed < 15 and len(adventCache) > 0:
-            advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
-            theScores = ""
-            for x in adventCache:
-                username = x[0]
-                score = x[1]
-                theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
-            advent.add_field(name="Scores", value=theScores, inline=False)
-            advent.set_footer(text="Data may be 15 minutes old")
-            await ctx.send(embed=advent)
+            pass
         else:
             adventCodeTimer = datetime.datetime.now()
             sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
@@ -235,21 +227,62 @@ class Commands(commands.Cog):
             response = get("https://adventofcode.com/2020/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
             assert response.status_code == 200, f"Failed request: {response.text}"
             data = response.content
-            adventScores = json.loads(data)
-            dataArray = []
-            for member in adventScores["members"]:
-                userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["local_score"]))
-                dataArray.append(userTuple)
-            dataArray.sort(key=lambda tup: tup[1], reverse=True)
-            adventCache = dataArray
-            advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
-            theScores = ""
-            for x in dataArray:
-                username = x[0]
-                score = x[1]
-                theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
-            advent.add_field(name="Scores", value=theScores, inline=False)
-            await ctx.send(embed=advent)
+            adventCache = json.loads(data)
+        dataArray = []
+        for member in adventCache["members"]:
+            userTuple = (adventScores["members"][member]["name"], int(adventScores["members"][member]["local_score"]))
+            dataArray.append(userTuple)
+        dataArray.sort(key=lambda tup: tup[1], reverse=True)
+        advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
+        theScores = ""
+        for x in dataArray:
+            username = x[0]
+            score = x[1]
+            theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
+        advent.add_field(name="Scores", value=theScores, inline=False)
+        advent.set_footer(text="Data may be 15 minutes old")
+        await ctx.send(embed=advent)
+
+    @commands.command()
+    async def adventstars(self, ctx, day):
+        global adventCodeTimer
+        global adventCache
+        timePassed = 0
+        if adventCodeTimer == 0:
+            adventCodeTimer = datetime.datetime.now()
+            timePassed = 15
+        else:
+            difference = datetime.datetime.now() - adventCodeTimer
+            timePassed = divmod(difference.days * 86400 + difference.seconds, 60)
+            timePassed = timePassed[0]
+        if timePassed < 15 and len(adventCache) > 0:
+            pass
+        else:
+            adventCodeTimer = datetime.datetime.now()
+            sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
+            cookies = {'session': sessionValue}
+            response = get("https://adventofcode.com/2020/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
+            assert response.status_code == 200, f"Failed request: {response.text}"
+            data = response.content
+            adventCache = json.loads(data)
+        dataArray = []
+        for member in adventCache["members"]:
+            counter = 0
+            for x in adventScores["members"][member]["name"]["completion_day_level"][day]:
+                counter += 1
+            userTuple = (adventScores["members"][member]["name"], counter)
+            dataArray.append(userTuple)
+        dataArray.sort(key=lambda tup: tup[1], reverse=True)
+        advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
+        theStars = ""
+        for x in dataArray:
+            username = x[0]
+            stars = x[1]
+            theStars = theStars + "**"+str(username)+"**: "+str(stars)+"\n"
+        advent.add_field(name="Stars", value=theStars, inline=False)
+        advent.set_footer(text="Data may be 15 minutes old")
+        await ctx.send(embed=advent)
+
 
 
 def setup(bot):
