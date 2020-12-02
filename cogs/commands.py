@@ -267,8 +267,10 @@ class Commands(commands.Cog):
             adventCache = json.loads(data)
         dataArray = []
         for member in adventCache["members"]:
-            stars = len(adventCache["members"][member]["completion_day_level"][str(day)])
-            userTuple = (adventCache["members"][member]["name"], stars)
+            counter = 0
+            for x in adventCache["members"][member]["completion_day_level"][str(day)]:
+                counter += 1
+            userTuple = (adventCache["members"][member]["name"], counter)
             dataArray.append(userTuple)
         dataArray.sort(key=lambda tup: tup[1], reverse=True)
         advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
