@@ -268,7 +268,7 @@ class Commands(commands.Cog):
         dataArray = []
         for member in adventCache["members"]:
             counter = 0
-            for x in adventCache["members"][member]["name"]["completion_day_level"][day]:
+            for x in adventCache["members"][member]["name"]["completion_day_level"][str(day)]:
                 counter += 1
             userTuple = (adventCache["members"][member]["name"], counter)
             dataArray.append(userTuple)
