@@ -45,8 +45,11 @@ async def on_message(message):
     if message.author.bot == True:
         return
     await bot.process_commands(message)
-    if "hannah" in message.content.lower():
-        await message.channel.send('<@!131332703919276032> sus')
+    hanArray = ["hannah", "han"]
+    for han in hanArray:
+        if han in message.content.lower():
+            await message.channel.send('<@!131332703919276032> sus')
+            return
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
