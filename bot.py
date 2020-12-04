@@ -45,7 +45,7 @@ async def on_message(message):
     if message.author.bot == True:
         return
     await bot.process_commands(message)
-    hanArray = ["hannah", "han"]
+    hanArray = ["hannah"]
     for han in hanArray:
         if han in message.content.lower():
             await message.channel.send('<@!131332703919276032> sus')
