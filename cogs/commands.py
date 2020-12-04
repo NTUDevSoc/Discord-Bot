@@ -244,9 +244,12 @@ class Commands(commands.Cog):
         await ctx.send(embed=advent)
 
     @commands.command()
-    async def adventstars(self, ctx, day):
-        try: 
-            int(day)
+    async def adventstars(self, ctx, day = 0):
+        try:
+            day = int(day)
+            if day < 0 or day > 25:
+                await ctx.send("That's not a valid day!")
+                return
             global adventCodeTimer
             global adventCache
             timePassed = 0
@@ -268,24 +271,48 @@ class Commands(commands.Cog):
                 data = response.content
                 adventCache = json.loads(data)
             dataArray = []
-            for member in adventCache["members"]:
-                stars = 0
-                try:
-                    stars = len(adventCache["members"][member]["completion_day_level"][str(day)])
-                except KeyError:
+            if day == 0:
+                for member in adventCache["members"]:
+                    stars = []
+                    for day_iter in range(1, datetime.date.today().day):
+                        try:
+                            stars.append(len(adventCache["members"][member]["completion_day_level"][str(day_iter)]))
+                        except KeyError:
+                            stars.append(0)
+                    userTuple = (adventCache["members"][member]["name"], int(adventCache["members"][member]["local_score"]), stars)
+                    dataArray.append(userTuple)
+                dataArray.sort(key=lambda tup: tup[1], reverse=True)
+                advent=discord.Embed(title="__Advent of Code - Stars__", color=0xe7ec11)
+                theStars = ""
+                for x in dataArray:
+                    username = x[0]
+                    stars = x[1]
+                    stars_str = ""
+                    for i in stars:
+                        stars_str += str(i)+" "
+                    theStars = theStars + "**"+str(username)+"**: "+stars_str+"\n"
+                advent.add_field(name="Stars", value=theStars, inline=False)
+                advent.set_footer(text="Data may be 15 minutes old")
+                await ctx.send(embed=advent)
+            else:
+                for member in adventCache["members"]:
                     stars = 0
-                userTuple = (adventCache["members"][member]["name"], stars)
-                dataArray.append(userTuple)
-            dataArray.sort(key=lambda tup: tup[1], reverse=True)
-            advent=discord.Embed(title="__Advent of Code - Day "+day+" Stars__", color=0xe7ec11)
-            theStars = ""
-            for x in dataArray:
-                username = x[0]
-                stars = x[1]
-                theStars = theStars + "**"+str(username)+"**: "+str(stars)+"\n"
-            advent.add_field(name="Stars", value=theStars, inline=False)
-            advent.set_footer(text="Data may be 15 minutes old")
-            await ctx.send(embed=advent)
+                    try:
+                        stars = len(adventCache["members"][member]["completion_day_level"][str(day)])
+                    except KeyError:
+                        stars = 0
+                    userTuple = (adventCache["members"][member]["name"], stars)
+                    dataArray.append(userTuple)
+                dataArray.sort(key=lambda tup: tup[1], reverse=True)
+                advent=discord.Embed(title="__Advent of Code - Day "+ day +" Stars__", color=0xe7ec11)
+                theStars = ""
+                for x in dataArray:
+                    username = x[0]
+                    stars = x[1]
+                    theStars = theStars + "**"+str(username)+"**: "+str(stars)+"\n"
+                advent.add_field(name="Stars", value=theStars, inline=False)
+                advent.set_footer(text="Data may be 15 minutes old")
+                await ctx.send(embed=advent)
         except ValueError:
             await ctx.send("That's not a valid day!")
 
