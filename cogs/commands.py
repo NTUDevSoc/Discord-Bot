@@ -12,9 +12,14 @@ async def in_bot_commands(ctx):
     channel_ids = (186605768080883713, 517651663729852416, 505476463492071425)
     return ctx.channel.id in channel_ids
 
+ac_tz = datetime.timezone(-datetime.timedelta(hours=5), name="EST")
+def utc_to_est(utc_dt):
+    return utc_dt.replace(tzinfo=datetime.timezone.utc).astimezone(tz=ac_tz)
+
 class Commands(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+
 
     @commands.command()
     @commands.check(in_bot_commands)
@@ -244,10 +249,10 @@ class Commands(commands.Cog):
         await ctx.send(embed=advent)
 
     @commands.command()
-    async def adventstars(self, ctx, day = 0):
+    async def adventstars(self, ctx, day = "0"):
         try:
-            day = int(day)
-            if day < 0 or day > 25:
+            int(day)
+            if int(day) < 0 or int(day) > 25:
                 await ctx.send("That's not a valid day!")
                 return
             global adventCodeTimer
@@ -271,17 +276,19 @@ class Commands(commands.Cog):
                 data = response.content
                 adventCache = json.loads(data)
             dataArray = []
-            if day == 0:
+            if day == "0":
                 for member in adventCache["members"]:
                     stars = []
-                    for day_iter in range(1, datetime.date.today().day):
+                    star_total = 0
+                    for day_iter in range(1, utc_to_est(datetime.datetime.now()).day+1):
                         try:
                             stars.append(len(adventCache["members"][member]["completion_day_level"][str(day_iter)]))
+                            star_total += int(len(adventCache["members"][member]["completion_day_level"][str(day_iter)]))
                         except KeyError:
                             stars.append(0)
-                    userTuple = (adventCache["members"][member]["name"], int(adventCache["members"][member]["local_score"]), stars)
+                    userTuple = (adventCache["members"][member]["name"], stars, star_total, int(adventCache["members"][member]["local_score"]))
                     dataArray.append(userTuple)
-                dataArray.sort(key=lambda tup: tup[1], reverse=True)
+                dataArray.sort(key=lambda tup: (tup[2], tup[3]), reverse=True)
                 advent=discord.Embed(title="__Advent of Code - Stars__", color=0xe7ec11)
                 theStars = ""
                 for x in dataArray:
