@@ -15,6 +15,7 @@ intents.typing = True
 intents.presences = True
 intents.messages = True
 intents.guilds = True
+intents.reactions = True
 
 #global vars
 TOKEN = os.environ['DISCORD_TOKEN']
@@ -22,7 +23,7 @@ TOKEN = os.environ['DISCORD_TOKEN']
 #set up bot object and cogs
 bot = commands.Bot(command_prefix='.', intents=intents)
 bot.remove_command('help')
-extensions = ['cogs.commands', 'cogs.roles']
+extensions = ['cogs.commands', 'cogs.roles', 'cogs.reaction_roles']
 
 #EVENTS
 @bot.event
@@ -63,6 +64,7 @@ if __name__ == "__main__":
     for extension in extensions:
         try:
             bot.load_extension(extension)
+            print("Loaded " + extension)
         except Exception as e:
             print('Failed to load extension ' + extension + '.')
             print(e)
