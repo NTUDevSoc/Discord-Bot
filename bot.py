@@ -36,8 +36,9 @@ async def on_member_join(member):
     except discord.Forbidden:
         await bot.send('ERROR: I don\'t have permission to set roles.')
     arrivalsChannel = bot.get_channel(783388268631818280)
+    roleChannel = bot.get_channel(785558941688922152)
     botChannel = bot.get_channel(517651663729852416)
-    await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+botChannel.mention+" to set a yeargroup role using .setrole and access the rest of the server.")
+    await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+roleChannel.mention+" to set your roles using Reaction Roles and access the rest of the server. (For more bot commands check out: " + botChannel.mention + ")")
 
 @bot.event
 async def on_message(message):
