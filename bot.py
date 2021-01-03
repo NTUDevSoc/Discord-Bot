@@ -52,6 +52,10 @@ async def on_message(message):
         if han in message.content.lower():
             await message.channel.send('<@!131332703919276032> sus')
             return
+    if "beans" in message.content.lower():
+        beans = discord.Embed()
+        beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
+        await message.author.send(embed=beans)
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
