@@ -110,7 +110,7 @@ class Commands(commands.Cog):
     @commands.has_role('Committee')
     async def clearchat(self, ctx, amount):
         try:
-            int(amount)
+            amount = int(amount)
             if amount > 30:
                 await ctx.send("You can only clear 30 messages at a time!")
             else:
