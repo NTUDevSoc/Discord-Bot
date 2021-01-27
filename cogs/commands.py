@@ -109,14 +109,15 @@ class Commands(commands.Cog):
     @commands.check(in_bot_commands)
     @commands.has_role('Committee')
     async def clearchat(self, ctx, amount):
-        if isinstance(amount, int):
+        try:
+            int(amount)
             if amount > 30:
                 await ctx.send("You can only clear 30 messages at a time!")
             else:
                 await ctx.channel.purge(limit=amount)
                 await ctx.send("Channel cleaned")
-        else:
-            await ctx.send("Not a valid amount!")
+        except ValueError:
+            await ctx.send("Not a valid number!")
 
         
     #Command to count members in each year in the server
