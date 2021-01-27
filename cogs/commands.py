@@ -85,27 +85,40 @@ class Commands(commands.Cog):
     #Command to mute all users in your current voice channel
     @commands.command()
     @commands.check(in_bot_commands)
+    @commands.has_role('Committee')
     async def channelmute(self, ctx):
-        if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032" or str(ctx.author.id) == "217693692943663104":
-            channel = ctx.message.author.voice.channel
-            for member in channel.members:
-                await member.edit(mute=True)
-            await ctx.send('Channel members muted!')
-        else:
-            await ctx.send('not 4 u')
+        channel = ctx.message.author.voice.channel
+        for member in channel.members:
+            await member.edit(mute=True)
+        await ctx.send('Channel members muted!')
+
 
     #Command to unmute all users in your current voice channel
     @commands.command()
     @commands.check(in_bot_commands)
+    @commands.has_role('Committee')
     async def channelunmute(self, ctx):
-        if str(ctx.author.id) == "280439222358245377" or str(ctx.author.id) == "131332703919276032" or str(ctx.author.id) == "217693692943663104":
-            channel = ctx.message.author.voice.channel
-            for member in channel.members:
-                await member.edit(mute=False)
-            await ctx.send('Channel members unmuted!')
-        else:
-            await ctx.send('not 4 u')
+        channel = ctx.message.author.voice.channel
+        for member in channel.members:
+            await member.edit(mute=False)
+        await ctx.send('Channel members unmuted!')
 
+
+    #Command to clear messages
+    @commands.command()
+    @commands.check(in_bot_commands)
+    @commands.has_role('Committee')
+    async def clearchat(self, ctx, amount):
+        if isinstance(amount, int):
+            if amount > 30:
+                await ctx.send("You can only clear 30 messages at a time!")
+            else:
+                await ctx.channel.purge(limit=amount)
+                await ctx.send("Channel cleaned")
+        else:
+            await ctx.send("Not a valid amount!")
+
+        
     #Command to count members in each year in the server
     @commands.command(aliases=['membercount', 'membercheck', 'memberlist'])
     @commands.check(in_bot_commands)

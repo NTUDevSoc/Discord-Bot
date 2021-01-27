@@ -38,6 +38,12 @@ async def on_member_join(member):
     botChannel = bot.get_channel(517651663729852416)
     await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+roleChannel.mention+" to set your roles using Reaction Roles and access the rest of the server. (For more bot commands check out: " + botChannel.mention + ")")
 
+
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.MissingRole):
+        print(ctx.author,"attempted to run:",ctx.message.content)
+
 @bot.event
 async def on_message(message):
     if message.author == bot.user:
