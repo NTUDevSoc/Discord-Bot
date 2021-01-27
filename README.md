@@ -1,7 +1,7 @@
 # DevSoc Discord Bot
 A repository containing the DevSoc discord server's python bot.
 
-Originally Created by Emi.
+Originally Created by [@emiipo](https://github.com/emiipo)
 
 Maintained/updated by [@petelampy](https://github.com/petelampy)
 
