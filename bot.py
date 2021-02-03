@@ -23,7 +23,7 @@ TOKEN = os.environ['DISCORD_TOKEN']
 #set up bot object and cogs
 bot = commands.Bot(command_prefix='.', intents=intents)
 bot.remove_command('help')
-extensions = ['cogs.commands', 'cogs.roles', 'cogs.reaction_roles']
+extensions = ['cogs.commands', 'cogs.roles', 'cogs.reaction_roles', 'cogs.rules']
 
 #EVENTS
 @bot.event
