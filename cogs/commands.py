@@ -116,10 +116,12 @@ class Commands(commands.Cog):
             if servermute in user.roles:
                 await user.remove_roles(servermute)
                 await user.add_roles(devsoc)
+                await ctx.send("Removed server mute!")
             else:
                 for role in user.roles[1:]:
                     await user.remove_roles(role)
                 await user.add_roles(servermute)
+                await ctx.send("Server muted!")
         else:
             await ctx.send("Please tag a user!")
 
