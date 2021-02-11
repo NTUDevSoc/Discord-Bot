@@ -105,6 +105,25 @@ class Commands(commands.Cog):
         await ctx.send('Channel members unmuted!')
 
 
+    #Command to server mute someone
+    @commands.command()
+    @commands.check(in_bot_commands)
+    @commands.has_role('Committee')
+    async def servermute(self, ctx, user: discord.Member = None):
+        if user:
+            servermute = discord.utils.get(ctx.guild.roles, name='Server Muted')
+            devsoc = discord.utils.get(ctx.guild.roles, name='DevSoc')
+            if servermute in user.roles:
+                await user.remove_roles(servermute)
+                await user.add_roles(devsoc)
+            else:
+                for role in user.roles[1:]:
+                    await user.remove_roles(role)
+                await user.add_roles(servermute)
+        else:
+            await ctx.send("Please tag a user!")
+
+
     #Command to clear messages
     @commands.command()
     @commands.check(in_bot_commands)
