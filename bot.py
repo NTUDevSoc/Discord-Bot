@@ -7,6 +7,7 @@ from discord.ext import commands
 import json
 from json import dumps
 import re
+from datetime import datetime
 
 #New discord intents system
 intents = discord.Intents.default()
@@ -38,7 +39,6 @@ async def on_member_join(member):
     rulesChannel = bot.get_channel(804817413841354843)
     await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+rulesChannel.mention+" to accept our server rules, then head to "+roleChannel.mention+" to set your roles using Reaction Roles and access the rest of the server.")
 
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRole):
@@ -60,6 +60,30 @@ async def on_message(message):
         beans = discord.Embed()
         beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
         await message.author.send(embed=beans)
+
+@bot.event
+async def on_message_delete(message):
+    guild = discord.utils.get(bot.guilds, id=206351865754025984)
+    logchannel = discord.utils.get(guild.channels, id=814152479100633128)
+    deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
+    deleteEmbed.add_field(name="__Message Content__", value=message.content, inline=False)
+    deleteEmbed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
+    deleteEmbed.set_footer(text="Deleted at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+    await logchannel.send(embed=deleteEmbed)
+
+@bot.event
+async def on_message_edit(before, after):
+    if before.content == after.content:
+        return
+    else:
+        guild = discord.utils.get(bot.guilds, id=206351865754025984)
+        logchannel = discord.utils.get(guild.channels, id=814152479100633128)
+        editEmbed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+before.author.mention, color=0xe7ec11)
+        editEmbed.add_field(name="__Message Channel__", value=before.channel.name, inline=False)
+        editEmbed.add_field(name="__Message Before__", value=before.content, inline=False)
+        editEmbed.add_field(name="__Message After__", value=after.content, inline=False)
+        editEmbed.set_footer(text="Edited at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+        await logchannel.send(embed=editEmbed)
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
