@@ -57,6 +57,8 @@ async def on_message(message):
             await message.channel.send('<@!131332703919276032> sus')
             return
     if "beans" in message.content.lower():
+        if message.author.id == 196142609528389632:
+            return
         beans = discord.Embed()
         beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
         await message.author.send(embed=beans)
