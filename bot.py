@@ -76,6 +76,8 @@ async def on_message_delete(message):
     guild = discord.utils.get(bot.guilds, id=206351865754025984)
     logchannel = discord.utils.get(guild.channels, id=814152479100633128)
     deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
+    if message.reference != None:
+        deleteEmbed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
     deleteEmbed.add_field(name="__Message Content__", value=message.content, inline=False)
     deleteEmbed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
     deleteEmbed.set_footer(text="Deleted at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
