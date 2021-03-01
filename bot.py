@@ -64,6 +64,14 @@ async def on_message(message):
         await message.author.send(embed=beans)
 
 @bot.event
+async def on_member_remove(member):
+    guild = discord.utils.get(bot.guilds, id=206351865754025984)
+    logchannel = discord.utils.get(guild.channels, id=814152479100633128)
+    removeEmbed=discord.Embed(title="__**Member Left**__", description="Member: "+member.name+" ("+member.mention+")", color=0xe7ec11)
+    removeEmbed.set_footer(text="Left at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+    await logchannel.send(embed=removeEmbed)
+
+@bot.event
 async def on_message_delete(message):
     guild = discord.utils.get(bot.guilds, id=206351865754025984)
     logchannel = discord.utils.get(guild.channels, id=814152479100633128)
