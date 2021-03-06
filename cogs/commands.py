@@ -150,7 +150,6 @@ class Commands(commands.Cog):
 
     #Command to clear messages
     @commands.command()
-    @commands.check(in_bot_commands)
     @commands.check(is_admin)
     async def clearchat(self, ctx, amount):
         try:
