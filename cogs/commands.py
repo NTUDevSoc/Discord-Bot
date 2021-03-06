@@ -107,7 +107,6 @@ class Commands(commands.Cog):
 
     #Command to mute all users in your current voice channel
     @commands.command()
-    @commands.check(in_bot_commands)
     @commands.check(is_admin)
     async def channelmute(self, ctx):
         channel = ctx.message.author.voice.channel
@@ -118,7 +117,6 @@ class Commands(commands.Cog):
 
     #Command to unmute all users in your current voice channel
     @commands.command()
-    @commands.check(in_bot_commands)
     @commands.check(is_admin)
     async def channelunmute(self, ctx):
         channel = ctx.message.author.voice.channel
@@ -129,7 +127,6 @@ class Commands(commands.Cog):
 
     #Command to server mute someone
     @commands.command()
-    @commands.check(in_bot_commands)
     @commands.check(is_admin)
     async def servermute(self, ctx, user: discord.Member = None):
         if user:
@@ -154,8 +151,8 @@ class Commands(commands.Cog):
     async def clearchat(self, ctx, amount):
         try:
             amount = int(amount)
-            if amount > 30:
-                await ctx.send("You can only clear 30 messages at a time!")
+            if amount > 45:
+                await ctx.send("You can only clear 45 messages at a time!")
             else:
                 await ctx.channel.purge(limit=amount)
                 await ctx.send("Channel cleaned")
