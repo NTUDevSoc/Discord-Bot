@@ -87,32 +87,38 @@ class Commands(commands.Cog):
     @commands.command(aliases=['membercount', 'membercheck', 'memberlist'])
     @commands.check(in_bot_commands)
     async def members(self, ctx):
-        firstcount = 0
-        secondcount = 0
-        placecount = 0
-        finalcount = 0
-        alumcount = 0
+        devMembers = {
+            "first": 0,
+            "second": 0,
+            "placement": 0,
+            "final": 0,
+            "masters": 0,
+            "alumni": 0
+        }
         guild = ctx.message.guild
         for member in guild.members:
             for role in member.roles:
                 if role.name == "First Year":
-                    firstcount = firstcount + 1
+                    devMembers["first"] += 1
                 elif role.name == "Second Year":
-                    secondcount = secondcount + 1
+                    devMembers["second"] += 1
                 elif role.name == "Placement Year":
-                    placecount = placecount + 1
+                    devMembers["placement"] += 1
                 elif role.name == "Third Year":
-                    finalcount = finalcount + 1
+                    devMembers["final"] += 1
                 elif role.name == "Fourth Year":
-                    finalcount = finalcount + 1
+                    devMembers["final"] += 1
+                elif role.name == "MSc Student":
+                    devMembers["masters"] += 1
                 elif role.name == "Alumni":
-                    alumcount = alumcount + 1
+                    devMembers["alumni"] += 1
         count=discord.Embed(title="__DevSoc Members__", description="*Here are the members of each year group within this server.*", color=0xe7ec11)
-        count.add_field(name="First Year", value=str(firstcount)+" members", inline=False)
-        count.add_field(name="Second Year", value=str(secondcount)+" members", inline=False)
-        count.add_field(name="Placement Year", value=str(placecount)+" members", inline=False)
-        count.add_field(name="Third/Final Year", value=str(finalcount)+" members", inline=False)
-        count.add_field(name="Alumni", value=str(alumcount)+" members", inline=False)
+        count.add_field(name="First Year", value=str(devMembers["first"])+" members", inline=False)
+        count.add_field(name="Second Year", value=str(devMembers["second"])+" members", inline=False)
+        count.add_field(name="Placement Year", value=str(devMembers["placement"])+" members", inline=False)
+        count.add_field(name="Third/Final Year", value=str(devMembers["final"])+" members", inline=False)
+        count.add_field(name="MSc Student", value=str(devMembers["masters"])+" members", inline=False)
+        count.add_field(name="Alumni", value=str(devMembers["alumni"])+" members", inline=False)
         count.set_footer(text="Bot created by Emi/Peter")
         await ctx.send(embed=count)
 
