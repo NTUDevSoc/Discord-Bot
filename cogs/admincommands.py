@@ -54,13 +54,17 @@ class AdminCommands(commands.Cog):
         if user:
             servermute = discord.utils.get(ctx.guild.roles, name='Server Muted')
             devsoc = discord.utils.get(ctx.guild.roles, name='DevSoc')
+            booster = discord.utils.get(ctx.guild.roles, name='Chosen One')
             if servermute in user.roles:
                 await user.remove_roles(servermute)
                 await user.add_roles(devsoc)
                 await ctx.send("Removed server mute!")
             else:
                 for role in user.roles[1:]:
-                    await user.remove_roles(role)
+                    if role == booster:
+                        continue
+                    else:
+                        await user.remove_roles(role)
                 await user.add_roles(servermute)
                 await ctx.send("Server muted!")
         else:
