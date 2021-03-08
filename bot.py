@@ -67,7 +67,7 @@ async def on_message(message):
 async def on_member_remove(member):
     guild = discord.utils.get(bot.guilds, id=206351865754025984)
     logchannel = discord.utils.get(guild.channels, id=814152479100633128)
-    removeEmbed=discord.Embed(title="__**Member Left**__", description="Member: "+member.name+" ("+member.mention+")", color=0xe7ec11)
+    removeEmbed=discord.Embed(title="__**Member Left**__", description="Member: "+member.name+" ("+member.mention+")", color=0xf4a701)
     removeEmbed.set_footer(text="Left at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
     await logchannel.send(embed=removeEmbed)
 
@@ -75,7 +75,7 @@ async def on_member_remove(member):
 async def on_message_delete(message):
     guild = discord.utils.get(bot.guilds, id=206351865754025984)
     logchannel = discord.utils.get(guild.channels, id=814152479100633128)
-    deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
+    deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
     if message.reference != None:
         deleteEmbed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
     deleteEmbed.add_field(name="__Message Content__", value=message.content, inline=False)
