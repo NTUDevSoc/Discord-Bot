@@ -1,6 +1,7 @@
 import discord
 import time
 from discord.ext import commands
+from datetime import datetime
 startTime = time.time()
 
 async def is_admin(ctx):
@@ -92,6 +93,7 @@ class AdminCommands(commands.Cog):
                     clearEmbed.add_field(name=str(message.author.name), value=str(message.content), inline=False)
                 clearEmbed.set_footer(text="Cleaned at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
                 await logchannel.send(embed=clearEmbed)
+                
                 await ctx.send("Channel cleaned")
         except ValueError:
             await ctx.send("Not a valid number!")
