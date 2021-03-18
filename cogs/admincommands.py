@@ -77,10 +77,21 @@ class AdminCommands(commands.Cog):
     async def clearchat(self, ctx, amount):
         try:
             amount = int(amount)
-            if amount > 45:
-                await ctx.send("You can only clear 45 messages at a time!")
+            if amount > 24:
+                await ctx.send("You can only clear 24 messages at a time!")
             else:
+                amount = amount + 1
+                messages = await ctx.channel.history(limit=amount).flatten()
+                messages = messages[::-1]
                 await ctx.channel.purge(limit=amount)
+
+                guild = discord.utils.get(bot.guilds, id=206351865754025984)
+                logchannel = discord.utils.get(guild.channels, id=814152479100633128)
+                clearEmbed=discord.Embed(title="__**Channel Cleaned**__", description=str(amount)+" messages cleared", color=0xe7ec11)
+                for message in messages:
+                    clearEmbed.add_field(name=str(message.author.name), value=str(message.content), inline=False)
+                clearEmbed.set_footer(text="Cleaned at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+                await logchannel.send(embed=clearEmbed)
                 await ctx.send("Channel cleaned")
         except ValueError:
             await ctx.send("Not a valid number!")
