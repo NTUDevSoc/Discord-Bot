@@ -86,8 +86,7 @@ class AdminCommands(commands.Cog):
                 messages = messages[::-1]
                 await ctx.channel.purge(limit=amount)
 
-                guild = discord.utils.get(bot.guilds, id=206351865754025984)
-                logchannel = discord.utils.get(guild.channels, id=814152479100633128)
+                logchannel = discord.utils.get(ctx.guild.channels, id=814152479100633128)
                 clearEmbed=discord.Embed(title="__**Channel Cleaned**__", description=str(amount)+" messages cleared", color=0xe7ec11)
                 for message in messages:
                     clearEmbed.add_field(name=str(message.author.name), value=str(message.content), inline=False)

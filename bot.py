@@ -1,4 +1,4 @@
-#by Emi/Sunglass :)
+#by Emi/Peter :)
 
 #imports
 import os, asyncio
