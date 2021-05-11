@@ -132,10 +132,8 @@ class Commands(commands.Cog):
             f"areaType={ AREA_TYPE }",
         ]
         structure = {
-            "cases": {
-                "daily": "newCasesByPublishDate",
-                "cumulative": "cumCasesByPublishDate"
-            },
+            "dailyCases": "newCasesByPublishDate",
+            "cumulativeCases": "cumCasesByPublishDate"
         }
         api_params = {
             "filters": str.join(";", filters),
@@ -147,8 +145,8 @@ class Commands(commands.Cog):
         assert response.status_code == 200, f"Failed request: {response.text}"
         data = response.content
         thedata = json.loads(data)
-        totalcases = int(thedata['data'][0]['cases']['cumulative'])
-        dailycases = int(thedata['data'][0]['cases']['daily'])
+        totalcases = int(thedata['data'][0]['cumulativeCases'])
+        dailycases = int(thedata['data'][0]['dailyCases'])
         covid=discord.Embed(title="__COVID Dashboard__", description="UK Government COVID Statistics", color=0xe7ec11)
         covid.add_field(name="Total Cases", value=totalcases, inline=False)
         covid.add_field(name="Daily Cases", value=dailycases, inline=False)
@@ -169,10 +167,8 @@ class Commands(commands.Cog):
                 f"areaName={ AREA_NAME }"
             ]
             structure = {
-                "cases": {
-                    "daily": "newCasesByPublishDate",
-                    "cumulative": "cumCasesByPublishDate"
-                },
+                "dailyCases": "newCasesByPublishDate",
+                "cumulativeCases": "cumCasesByPublishDate"
             }
             api_params = {
                 "filters": str.join(";", filters),
@@ -184,8 +180,8 @@ class Commands(commands.Cog):
             assert response.status_code == 200, f"Failed request: {response.text}"
             data = response.content
             thedata = json.loads(data)
-            totalcases = int(thedata['data'][0]['cases']['cumulative'])
-            dailycases = int(thedata['data'][0]['cases']['daily'])
+            totalcases = int(thedata['data'][0]['cumulativeCases'])
+            dailycases = int(thedata['data'][0]['dailyCases'])
             covid=discord.Embed(title="__COVID Dashboard - "+str(region)+"__", description=str(region)+" COVID Statistics", color=0xe7ec11)
             covid.add_field(name="Region Cases", value=totalcases, inline=False)
             covid.add_field(name="Region Daily Cases", value=dailycases, inline=False)
