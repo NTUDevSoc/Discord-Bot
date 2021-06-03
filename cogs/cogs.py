@@ -26,7 +26,6 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def load(self, ctx, extension):
-        self.__saveDB__()
         embed=discord.Embed(title="Cog Load")
 
         if extension == "cogs":
@@ -48,7 +47,6 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def unload(self, ctx, extension):
-        self.__saveDB__()
         embed=discord.Embed(title="Cog Unload")
 
         if extension == "cogs":
@@ -70,7 +68,6 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, extension):
-        self.__saveDB__()
         embed=discord.Embed(title="Cog Reload")
 
         if extension == "all":
