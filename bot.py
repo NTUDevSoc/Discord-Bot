@@ -2,7 +2,7 @@ import discord
 import os
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=".", description="DevBot")
+client = commands.Bot(command_prefix=".", owner_id=153487284061077504, description="DevBot")
 
 TOKEN = os.environ["TOKEN"]
 
