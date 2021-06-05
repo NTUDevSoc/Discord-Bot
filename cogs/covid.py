@@ -11,6 +11,7 @@ class Covid(commands.Cog):
     def __init__(self, client):
         self.client = client
     
+    #By Emi/Peter
     @commands.command()
     @commands.check(command_channels)
     async def covidoverview(self, ctx):
@@ -39,6 +40,7 @@ class Covid(commands.Cog):
         embed.add_field(name="Daily Cases", value=dailycases, inline=False)
         await ctx.send(embed=embed)
 
+    #By Emi/Peter
     @commands.command()
     @commands.check(command_channels)
     async def covidregion(self, ctx, *region):
