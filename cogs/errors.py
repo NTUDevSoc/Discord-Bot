@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class error(commands.Cog):
+class Error(commands.Cog):
 
     def __init__(self, client):
         self.client = client
@@ -25,4 +25,4 @@ class error(commands.Cog):
         await self.client.botTestChannel.send(embed=embed)
 
 def setup(client):
-    client.add_cog(error(client))
+    client.add_cog(Error(client))
