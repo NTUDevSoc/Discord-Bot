@@ -11,7 +11,7 @@ class Error(commands.Cog):
 
         embed=discord.Embed(title="Error", description=f"{error}", color=0xe7ec11)
         embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
-        await self.client.botTestChannel.send(embed=embed)
+        await self.client.botLogChannel.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, error):
@@ -22,7 +22,7 @@ class Error(commands.Cog):
         embed.add_field(name="Server:", value=f"{ctx.guild.name}", inline=True)
         embed.add_field(name="Channel:", value=f"{ctx.channel.name}", inline=True)  
         embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
-        await self.client.botTestChannel.send(embed=embed)
+        await self.client.botLogChannel.send(embed=embed)
 
 def setup(client):
     client.add_cog(Error(client))
