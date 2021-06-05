@@ -26,7 +26,7 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def load(self, ctx, extension):
-        embed=discord.Embed(title="Cog Load")
+        embed=discord.Embed(title="Cog Load", color=0xe7ec11)
 
         if extension == "cogs":
             embed.add_field(name="cogs", value="Use Reload", inline=False)
@@ -47,7 +47,7 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def unload(self, ctx, extension):
-        embed=discord.Embed(title="Cog Unload")
+        embed=discord.Embed(title="Cog Unload", color=0xe7ec11)
 
         if extension == "cogs":
             embed.add_field(name="cogs", value="Use Reload", inline=False)
@@ -68,7 +68,7 @@ class cogs(commands.Cog):
     @commands.command()
     @commands.is_owner()
     async def reload(self, ctx, extension):
-        embed=discord.Embed(title="Cog Reload")
+        embed=discord.Embed(title="Cog Reload", color=0xe7ec11)
 
         if extension == "all":
             for filename in os.listdir("./cogs"):
