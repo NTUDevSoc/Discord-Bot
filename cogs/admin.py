@@ -29,7 +29,7 @@ class Admin(commands.Cog):
                     embed.add_field(name=message.author.name, value="Embedded Message", inline=False)
                 else:
                     embed.add_field(name=message.author.name, value=message.content, inline=False)
-            embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+            embed.set_footer(text="Bot created by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
             await self.client.botLogChannel.send(embed=embed)
 
             

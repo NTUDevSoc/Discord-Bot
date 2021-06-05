@@ -41,7 +41,7 @@ class Cogs(commands.Cog):
             else:
                 msgname, msgvalue = self.__loadCog__(ctx, extension)
                 embed.add_field(name=msgname, value=msgvalue, inline=False)
-        embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+        embed.set_footer(text="Bot created by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await ctx.send(embed=embed) 
 
     @commands.command()
@@ -62,7 +62,7 @@ class Cogs(commands.Cog):
             else:
                 msgname, msgvalue = self.__unloadCog__(ctx, extension)
                 embed.add_field(name=msgname, value=msgvalue, inline=False)
-        embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+        embed.set_footer(text="Bot created by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await ctx.send(embed=embed) 
 
     @commands.command()
@@ -81,7 +81,7 @@ class Cogs(commands.Cog):
             msgname, msgvalue = self.__loadCog__(ctx, extension)
             embed.add_field(name=msgname, value=msgvalue, inline=False)
             
-        embed.set_footer(text="Bot created by DevJ4Y", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+        embed.set_footer(text="Bot created by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await ctx.send(embed=embed) 
 
 def setup(client):
