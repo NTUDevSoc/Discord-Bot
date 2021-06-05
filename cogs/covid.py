@@ -3,7 +3,7 @@ from discord.ext import commands
 import json
 import requests
 
-async def command_channels(self, ctx):
+async def command_channels(ctx):
     return ctx.channel.id == self.botCommandChannel.id
 
 class Covid(commands.Cog):
