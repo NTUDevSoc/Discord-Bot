@@ -24,7 +24,6 @@ class Admin(commands.Cog):
             messages = await ctx.channel.purge(limit=amount+1)
             embed=discord.Embed(title="Chat Cleared", description=f"{amount} messages cleared from {ctx.channel.name} \n {str(datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))}", color=0xe7ec11)
             for message in messages:
-                print(f"{message.content}")
                 if message.embeds:
                     embed.add_field(name=message.author.name, value="Embedded Message", inline=False)
                 else:
