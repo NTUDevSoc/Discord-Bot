@@ -10,7 +10,7 @@ async def is_admin(ctx):
     else:
         return False
 
-class Admin(commands.Cog):
+class Admin(commands.Cog, command_attrs=dict(hidden=True)):
 
     def __init__(self, client):
         self.client = client
