@@ -12,8 +12,8 @@ async def on_ready():
     print(f"\n\nLogged in as: {client.user.name} - {client.user.id}\nVersion: {discord.__version__}\n")
     print("Successfully logged in")
 
-    client.botLogChannel = await client.fetch_channel(850023556069851156)
-    client.botCommandChannel = await client.fetch_channel(850675110343999490)
+    client.botLogChannel = await client.fetch_channel(854307344778002435)
+    client.botCommandChannel = await client.fetch_channel(854307344950099971)
 
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):

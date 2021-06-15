@@ -4,7 +4,7 @@ import json
 import requests
 
 async def command_channels(ctx):
-    return ctx.channel.id == 850675110343999490
+    return ctx.channel.id == 854307344950099971
 
 class Covid(commands.Cog):
 

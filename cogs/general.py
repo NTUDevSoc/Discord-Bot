@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 async def command_channels(ctx):
-    return ctx.channel.id == 850675110343999490
+    return ctx.channel.id == 854307344950099971
 
 class General(commands.Cog):
 
