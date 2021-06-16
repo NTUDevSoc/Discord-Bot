@@ -293,7 +293,7 @@ class Roles(commands.Cog):
                 await ctx.author.remove_roles(self.placement)
             await ctx.send('Set role of: ' + self.role + '! Without Placement.')
 
-    @commands.command()
+    @commands.command(hidden=True)
     @commands.check(command_channels)
     @commands.is_owner()
     async def updateroles(self, ctx):
