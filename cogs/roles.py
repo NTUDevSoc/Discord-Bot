@@ -59,7 +59,7 @@ class Roles(commands.Cog):
                             await user.remove_roles(role)
 
 
-    @commands.command()
+    @commands.command(hidden=True)
     @commands.has_role("Committee")
     async def rr(self, ctx, *args):
         if args[0] == "start":
