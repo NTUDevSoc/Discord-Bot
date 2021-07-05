@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import RawReactionActionEvent
 
 async def command_channels(ctx):
-    return ctx.channel.id in (854307344950099971, 854307344778002434)
+    return ctx.channel.id in (854307344950099971, 854307344778002434) #TODO UPDATE ID
 
 #Roles By Emi
 
@@ -15,7 +15,7 @@ class Roles(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload: RawReactionActionEvent):
-        if payload.user_id != 505395358608916491:
+        if payload.user_id != self.client.user.id: 
             for message in self.data:
                 if int(message) == payload.message_id:
                     for reaction in self.data[message]:
@@ -48,7 +48,7 @@ class Roles(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload: RawReactionActionEvent):
-        if payload.user_id != 505395358608916491:
+        if payload.user_id != self.client.user.id:
             for message in self.data:
                 if int(message) == payload.message_id:
                     for reaction in self.data[message]:
@@ -181,7 +181,7 @@ class Roles(commands.Cog):
                 else:
                     main_message = discord.Embed(title="Select role for:", color=0xe7ec11)
                 main_message.add_field(name=temp["title"], value=emoji_roles, inline=False)
-                main_message.set_footer(text="Bot developed by Emi/Peter")
+                main_message.set_footer(text="Feature developed by Emi/Peter")
 
                 rr_message = await message_channel.send(embed=main_message)
                 for item in temp:
@@ -213,7 +213,7 @@ class Roles(commands.Cog):
             roles.set_author(name="Set Role Command - Info", icon_url="https://i.imgur.com/NhVjX8S.png")
             roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
             roles.add_field(name="Placement options", value="Yes/No", inline=False)
-            roles.set_footer(text="Bot developed by Emi/Peter")
+            roles.set_footer(text="Feature developed by Emi/Peter")
             await ctx.send(embed=roles)
         elif len(args) == 1:
             await self.set_role(ctx, args[0])
@@ -221,28 +221,6 @@ class Roles(commands.Cog):
             await self.set_role(ctx, args[0], args[1])
         else:
             await ctx.send('Too many arguments!')
-
-    @commands.command()
-    @commands.check(command_channels)
-    async def helproles(self, ctx):
-        roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
-        roles.set_author(name="Set Role Command - Info", icon_url="https://i.imgur.com/NhVjX8S.png")
-        roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
-        roles.add_field(name="Placement options", value="Yes/No", inline=False)
-        roles.set_footer(text="Bot developed by Emi/Peter")
-        await ctx.send(embed=roles)
-
-    @commands.command()
-    @commands.check(command_channels)
-    async def announcement(self, ctx):
-        self.announcement = discord.utils.get(ctx.guild.roles, name='Announcement')
-        if self.announcement in ctx.author.roles:
-            await ctx.author.remove_roles(self.announcement)
-            await ctx.send('You have been removed from announcements.')
-        else:
-            await ctx.author.add_roles(self.announcement)
-            await ctx.send('You have been added to announcements.')
-        
 
     async def set_role(self, ctx, role, placement = ''):
         self.first_year = discord.utils.get(ctx.guild.roles, name='First Year')
@@ -292,6 +270,28 @@ class Roles(commands.Cog):
             if self.placement in ctx.author.roles:
                 await ctx.author.remove_roles(self.placement)
             await ctx.send('Set role of: ' + self.role + '! Without Placement.')
+
+    @commands.command()
+    @commands.check(command_channels)
+    async def helproles(self, ctx):
+        roles=discord.Embed(title="This is the syntax for setting a role", description=".setrole (year) (if going on/went to placement)", color=0xe7ec11)
+        roles.set_author(name="Set Role Command - Info", icon_url="https://i.imgur.com/NhVjX8S.png")
+        roles.add_field(name="Year options", value="First Year - first, 1, 1st, one\nSecond Year - second, 2, 2nd, two\nThird Year - third, 3, 3rd, three\nPlacement Year - placement, 3/4, 3/4ths\nFourth Year - fourth, 4, 4th, four\nAlumni - alumni, 5, 5th, five, last", inline=False)
+        roles.add_field(name="Placement options", value="Yes/No", inline=False)
+        roles.set_footer(text="Feature developed by Emi/Peter")
+        await ctx.send(embed=roles)
+
+    @commands.command()
+    @commands.check(command_channels)
+    async def announcement(self, ctx):
+        self.announcement = discord.utils.get(ctx.guild.roles, name='Announcement')
+        if self.announcement in ctx.author.roles:
+            await ctx.author.remove_roles(self.announcement)
+            await ctx.send('You have been removed from announcements.')
+        else:
+            await ctx.author.add_roles(self.announcement)
+            await ctx.send('You have been added to announcements.')
+        
 
     @commands.command(hidden=True)
     @commands.check(command_channels)
