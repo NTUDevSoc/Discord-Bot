@@ -3,6 +3,7 @@ import os, asyncio
 from discord.ext import commands
 
 client = commands.Bot(command_prefix=".", owner_id=153487284061077504, description="DevBot")
+client.remove_command('help')
 
 TOKEN = os.environ["TOKEN"]
 
