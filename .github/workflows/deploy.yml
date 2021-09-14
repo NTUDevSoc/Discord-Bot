@@ -1,0 +1,21 @@
+name: Deployment Workflow
+on:
+  push:
+    branches: [ master ]
+  
+jobs:
+  job_one:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: testing
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_SECRET }}
+        username: jay
+        key: ${{ secrets.DEV_SECRET }}
+        port: 22
+        script: |
+          cd /home/jay/Discord-Bot
+          git pull origin master
+          git status
