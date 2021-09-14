@@ -8,14 +8,14 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
-    - name: testing
+    - name: ssh pull
       uses: appleboy/ssh-action@master
       with:
-        host: ${{ secrets.VPS_SECRET }}
-        username: jay
-        key: ${{ secrets.DEV_SECRET }}
+        host: ${{ secrets.host }}
+        username: ${{ secrets.user }}
+        key: ${{ secrets.ssh_key }}
         port: 22
         script: |
-          cd /home/jay/Discord-Bot
+          cd /home/${{ secrets.user }}/Discord-Bot
           git pull origin master
           git status
