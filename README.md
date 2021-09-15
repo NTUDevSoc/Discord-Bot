@@ -2,11 +2,12 @@
 A repository containing the DevSoc discord server's python bot.
 
 Originally Created by [@emiipo](https://github.com/emiipo)
+Previously maintained/updated by [@petelampy](https://github.com/petelampy)
 
-Maintained/updated by [@petelampy](https://github.com/petelampy)
+Maintained/updated by [@devj4y](https://github.com/devj4y)
 
 ## Adding a command
-To add a command either do it in `commands.py` or make a new cog(class with its own listeners and commands):
+To add a command either do it in `general.py` or make a new cog(class with its own listeners and commands):
 
 ### Adding it in commands.py:
 ```python
@@ -29,13 +30,12 @@ class Cog_Name: #Setup the cog.
   def __init__(self, bot):
     self.bot = bot #If you don't have this the commands won't work as they won't be able to get ctx(context).
 ```
-* Write your commands the same way as in `commands.py`
+* Write your commands the same way as in `general.py`
 * Don't forget to add this at the end:
 ```python
 def setup(bot):
   bot.add_cog(Cog_Name(bot))
 ```
-* Add your cog to the extensions list in `bot.py`
 
 
 More on commands: [here](https://discordpy.readthedocs.io/en/rewrite/ext/commands/commands.html)
