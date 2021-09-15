@@ -2,7 +2,15 @@ import discord
 import os, asyncio
 from discord.ext import commands
 
-client = commands.Bot(command_prefix=".", owner_id=153487284061077504, description="DevBot")
+intents = discord.Intents.default()
+intents.members = True
+intents.typing = True
+intents.presences = True
+intents.messages = True
+intents.guilds = True
+intents.reactions = True
+
+client = commands.Bot(command_prefix=".", owner_id=153487284061077504, description="DevBot", intents=intents)
 client.remove_command('help')
 
 TOKEN = os.environ["TOKEN"]
