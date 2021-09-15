@@ -52,7 +52,7 @@ class Highlights(commands.Cog):
         for user_id, word in self.highlight_data.items():
             if word in message.content.lower():
                 
-                if user_id == message.author.id:
+                if user_id == str(message.author.id):
                     return
 
                 history = await message.channel.history(limit=4, before=message).flatten()
