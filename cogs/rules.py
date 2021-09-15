@@ -6,11 +6,11 @@ class Rules(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.ruleID = 854664925455974420 #TODO UPDATE ID
+        self.ruleID = 806592818993954867
 
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload: RawReactionActionEvent):
-        if payload.user_id != 153487284061077504: #TODO UPDATE ID
+        if payload.user_id != self.client.owner_id:
             if payload.message_id == int(self.ruleID):
                 if "placement_yes" == payload.emoji.name:
                     guild = discord.utils.get(self.client.guilds, id=payload.guild_id)
@@ -19,7 +19,7 @@ class Rules(commands.Cog):
 
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload: RawReactionActionEvent):
-        if payload.user_id != 153487284061077504: #TODO UPDATE ID
+        if payload.user_id != self.client.owner_id:
             if payload.message_id == int(self.ruleID):
                 if "placement_yes" == payload.emoji.name:
                     guild = discord.utils.get(self.client.guilds, id=payload.guild_id)

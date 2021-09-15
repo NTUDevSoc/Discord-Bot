@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 
 async def command_channels(ctx):
-    return ctx.channel.id in (854307344950099971, 854307344778002434) #TODO UPDATE ID
+    return ctx.channel.id in (517651663729852416, 505476463492071425)
 
 class General(commands.Cog):
 
@@ -109,9 +109,9 @@ class General(commands.Cog):
             await member.add_roles(role)
         except discord.Forbidden:
             await self.client.send('ERROR: I don\'t have permission to set roles.')
-        arrivalsChannel = self.client.get_channel(854307344950099968) #TODO UPDATE ID
-        roleChannel = self.client.get_channel(854307344565534768)
-        rulesChannel = self.client.get_channel(854307344565534765)
+        arrivalsChannel = self.client.get_channel(783388268631818280)
+        roleChannel = self.client.get_channel(785558941688922152)
+        rulesChannel = self.client.get_channel(804817413841354843)
         await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+rulesChannel.mention+" to accept our server rules, then head to "+roleChannel.mention+" to set your roles using Reaction Roles and access the rest of the server.")
 
 

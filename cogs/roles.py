@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import RawReactionActionEvent
 
 async def command_channels(ctx):
-    return ctx.channel.id in (854307344950099971, 854307344778002434) #TODO UPDATE ID
+    return ctx.channel.id in (517651663729852416, 505476463492071425)
 
 #Roles By Emi
 
