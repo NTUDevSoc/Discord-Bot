@@ -16,27 +16,7 @@ class Highlights(commands.Cog):
         with open("data/highlight_data.json", "w") as file:
             json.dump(self.highlight_data, file, sort_keys=True, indent=4)
 
-    @commands.command()
-    @commands.check(command_channels)
-    async def highlight(self, ctx, command, *, args = None):
-
-        embed=discord.Embed(title="Highlights", color=0xe7ec11)
-
-        if command.lower() == "set":
-            embed.add_field(name="Set", value=args, inline=False)
-            self.highlight_data[str(ctx.author.id)] = args.lower()
-        elif command.lower() == "remove":
-            embed.add_field(name="Removed", value=self.highlight_data[str(ctx.author.id)], inline=False)
-            if str(ctx.author.id) in self.highlight_data:
-                del self.highlight_data[str(ctx.author.id)]
-        else:
-            embed.add_field(name="Option Unknown", value="Try 'set' or 'remove'", inline=False)
-        embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
-        self.saveDB()
-        await ctx.send(embed=embed)
-
-    @commands.Cog.listener()
-    async def on_message(self, message):
+    async def message_check(self, message):
         if message.author.bot:
             return
 
@@ -48,6 +28,9 @@ class Highlights(commands.Cog):
         
         if "hannah" in message.content.lower():
             await message.channel.send("<@!131332703919276032> sus")
+
+        if message.channel.id in (505094359272652831, 813461899542790164, 505476463492071425, 814152479100633128, 886582676218331186):
+            return
 
         for user_id, word in self.highlight_data.items():
             if word in message.content.lower():
@@ -69,6 +52,33 @@ class Highlights(commands.Cog):
                 user = message.guild.get_member(int(user_id))
                 await user.send(embed=embed)
                 return
+
+    @commands.command()
+    @commands.check(command_channels)
+    async def highlight(self, ctx, command, *, args = None):
+
+        embed=discord.Embed(title="Highlights", color=0xe7ec11)
+
+        if command.lower() == "set":
+            embed.add_field(name="Set", value=args, inline=False)
+            self.highlight_data[str(ctx.author.id)] = args.lower()
+        elif command.lower() == "remove":
+            embed.add_field(name="Removed", value=self.highlight_data[str(ctx.author.id)], inline=False)
+            if str(ctx.author.id) in self.highlight_data:
+                del self.highlight_data[str(ctx.author.id)]
+        else:
+            embed.add_field(name="Option Unknown", value="Try 'set' or 'remove'", inline=False)
+        embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+        self.saveDB()
+        await ctx.send(embed=embed)
+
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        await self.message_check(message)
+
+    @commands.Cog.listener()
+    async def on_message_edit(self, before, after):
+        await self.message_check(after)
 
 
 def setup(client):
