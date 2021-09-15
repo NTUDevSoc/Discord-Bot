@@ -1,5 +1,5 @@
 import discord
-import os, asyncio
+import os
 from discord.ext import commands
 
 intents = discord.Intents.default()
