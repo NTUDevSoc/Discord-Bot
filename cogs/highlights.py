@@ -45,12 +45,16 @@ class Highlights(commands.Cog):
 
         if message.content.startswith("."):
             return
-
+        
         if "hannah" in message.content.lower():
             await message.channel.send("<@!131332703919276032> sus")
 
         for user_id, word in self.highlight_data.items():
-            if word in message.content.lower().split():
+            if word in message.content.lower():
+                
+                if user_id == message.author.id:
+                    return
+
                 history = await message.channel.history(limit=4, before=message).flatten()
                 desc = ""
                 embed=discord.Embed(title="Highlight", url=f"{message.jump_url}", color=0xe7ec11)
