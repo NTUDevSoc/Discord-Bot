@@ -33,7 +33,7 @@ class Highlights(commands.Cog):
             return
 
         for user_id, word in self.highlight_data.items():
-            if word in message.content.lower():
+            if word in message.content.lower().split():
                 
                 if user_id == str(message.author.id):
                     return
@@ -55,13 +55,16 @@ class Highlights(commands.Cog):
 
     @commands.command()
     @commands.check(command_channels)
-    async def highlight(self, ctx, command, *, args = None):
+    async def highlight(self, ctx, command, word = None):
 
         embed=discord.Embed(title="Highlights", color=0xe7ec11)
 
         if command.lower() == "set":
-            embed.add_field(name="Set", value=args, inline=False)
-            self.highlight_data[str(ctx.author.id)] = args.lower()
+            if word:
+                embed.add_field(name="Set", value=word, inline=False)
+                self.highlight_data[str(ctx.author.id)] = word.lower()
+            else:
+                embed.add_field(name="Missing word", value="Provide a word to be notified for", inline=False)
         elif command.lower() == "remove":
             embed.add_field(name="Removed", value=self.highlight_data[str(ctx.author.id)], inline=False)
             if str(ctx.author.id) in self.highlight_data:
