@@ -42,7 +42,7 @@ class Meme(commands.Cog):
         if message.content.startswith("."):
             return
 
-        if "rat" in message.content.lower():
+        if "rat fact" in message.content.lower():
             i = random.randrange(len(self.rat_fact))
             await message.channel.send(f"{self.rat_fact[i]}")
 
