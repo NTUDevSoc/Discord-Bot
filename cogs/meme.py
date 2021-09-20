@@ -45,9 +45,12 @@ class Meme(commands.Cog):
         if "rat" in message.content.lower():
             i = random.randrange(len(self.rat_fact))
             await message.channel.send(f"{self.rat_fact[i]}")
-            
+
         elif "among us" in message.content.lower() and message.author.id == 146353541244649473: #KHAN
             await message.channel.send("**NO**")
+
+        elif "hello there" in message.content.lower():
+            await message.channel.send("https://tenor.com/view/grevious-general-kenobi-star-wars-gif-11406339")
 
 def setup(client):
     client.add_cog(Meme(client))
