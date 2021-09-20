@@ -114,7 +114,9 @@ class General(commands.Cog):
         roleChannel = self.client.get_channel(785558941688922152)
         rulesChannel = self.client.get_channel(804817413841354843)
         await arrivalsChannel.send("Welcome "+member.mention+"! Head to "+rulesChannel.mention+" to accept our server rules, then head to "+roleChannel.mention+" to set your roles using Reaction Roles and access the rest of the server.")
-        await member.send("Welcome to DevSoc!\n\nMake sure to read and accept the [rules](https://discord.com/channels/206351865754025984/804817413841354843/804819409536417832) then head to [self-roles](https://discord.com/channels/206351865754025984/785558941688922152/804068089758482472) to set your roles")
+        embed=discord.Embed(title="Welcome to Devsoc!", description="\nMake sure to read and accept the [rules](https://discord.com/channels/206351865754025984/804817413841354843/804819409536417832) then head to [self-roles](https://discord.com/channels/206351865754025984/785558941688922152/804068089758482472) to set your roles", color=0xe7ec11)
+        embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
+        await member.send(embed=embed)
 
 def setup(client):
     client.add_cog(General(client))
