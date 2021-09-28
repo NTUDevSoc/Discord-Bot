@@ -19,7 +19,8 @@ class Logs(commands.Cog):
     async def on_message_delete(self, message):
         deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
         if message.reference != None:
-            deleteEmbed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
+            if message.reference.resolved != None:
+                deleteEmbed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
         else:
             deleteEmbed.add_field(name="__Message Content__", value=message.content, inline=False)
         deleteEmbed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
