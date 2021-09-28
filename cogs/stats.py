@@ -19,14 +19,12 @@ class Stats(commands.Cog, command_attrs=dict(hidden=True)):
     @commands.command()
     @commands.check(is_admin)
     async def room(self, ctx, status = None):
-        await ctx.message.delete()
-        
         if not status:
             return
 
-        if status.lower() in ("open"):
+        if status.lower() in ("opened", "open", "o"):
             await self.client.roomChannel.edit(name="DevSoc Room: Open")
-        elif status.lower() in ("closed"):
+        elif status.lower() in ("closed", "close", "c"):
             await self.client.roomChannel.edit(name="DevSoc Room: Closed")
         else:
             await self.client.roomChannel.edit(name=f"DevSoc Room: {status}]")
