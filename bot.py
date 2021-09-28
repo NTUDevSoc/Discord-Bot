@@ -23,6 +23,7 @@ async def on_ready():
 
     client.botLogChannel = await client.fetch_channel(814152479100633128)
     client.botCommandChannel = await client.fetch_channel(517651663729852416)
+    client.roomChannel = await client.fetch_channel(892436503890915438)
 
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
