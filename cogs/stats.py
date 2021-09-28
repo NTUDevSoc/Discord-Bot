@@ -27,7 +27,7 @@ class Stats(commands.Cog, command_attrs=dict(hidden=True)):
         elif status.lower() in ("closed", "close", "c"):
             await self.client.roomChannel.edit(name="DevSoc Room: Closed")
         else:
-            await self.client.roomChannel.edit(name=f"DevSoc Room: {status}]")
+            await self.client.roomChannel.edit(name=f"DevSoc Room: {status}")
 
 
 
