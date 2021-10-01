@@ -10,6 +10,15 @@ class Logs(commands.Cog):
         self.client = client
 
     @commands.Cog.listener()
+    async def on_member_join(self, member):
+        joinEmbed=discord.Embed(title="__**Member Join**__", description=f"Member: {member.name}#{member.discriminator}", color=0xf4a701)
+        joinEmbed.set_thumbnail(url=member.avatar_url)
+        joinEmbed.add_field(name='Joined Server', value=member.joined_at.strftime("%Y-%m-%d %H:%M:%S"))
+        joinEmbed.add_field(name='Joined Discord', value=member.created_at.strftime("%Y-%m-%d %H:%M:%S"))
+        joinEmbed.set_footer(text=f"ID: {member.id}")
+        await self.client.botLogChannel.send(embed=joinEmbed)
+
+    @commands.Cog.listener()
     async def on_member_remove(self, member):
         removeEmbed=discord.Embed(title="__**Member Left**__", description="Member: "+member.name+" ("+member.mention+")", color=0xf4a701)
         removeEmbed.set_footer(text="Left at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
