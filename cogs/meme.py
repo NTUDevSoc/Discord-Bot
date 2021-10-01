@@ -52,7 +52,7 @@ class Meme(commands.Cog):
         elif "hello there" in message.content.lower():
             await message.author.send("https://tenor.com/view/grevious-general-kenobi-star-wars-gif-11406339")
 
-        if "beans" in message.content.lower():
+        elif "beans" in message.content.lower():
             beans = discord.Embed()
             beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
             beans.set_footer(text="You thought i was gone? Shh")
