@@ -42,6 +42,9 @@ class Meme(commands.Cog):
         if message.content.startswith("."):
             return
 
+        if message.embeds:
+            return
+
         if "rat fact" in message.content.lower():
             i = random.randrange(len(self.rat_fact))
             await message.author.send(f"{self.rat_fact[i]}")
