@@ -55,6 +55,7 @@ class Meme(commands.Cog):
         if "beans" in message.content.lower():
             beans = discord.Embed()
             beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
+            beans.set_footer(text="You thought i was gone? Shh")
             await message.author.send(embed=beans)
 
 def setup(client):
