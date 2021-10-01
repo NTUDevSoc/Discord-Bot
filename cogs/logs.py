@@ -17,6 +17,9 @@ class Logs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):
+        if isinstance(message.channel, discord.channel.DMChannel):
+            return
+
         deleteEmbed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
         if message.reference != None:
             if message.reference.resolved != None:
@@ -29,6 +32,9 @@ class Logs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
+        if isinstance(after.channel, discord.channel.DMChannel):
+            return
+
         if before.content == after.content:
             return
         else:
