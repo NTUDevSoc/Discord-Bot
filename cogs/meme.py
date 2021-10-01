@@ -42,15 +42,27 @@ class Meme(commands.Cog):
         if message.content.startswith("."):
             return
 
+        if message.embeds:
+            return
+
         if "rat fact" in message.content.lower():
             i = random.randrange(len(self.rat_fact))
             await message.author.send(f"{self.rat_fact[i]}")
 
-        elif "among us" in message.content.lower() and message.author.id == 146353541244649473: #KHAN
-            await message.author.send("**NO**")
+        elif message.author.id == 146353541244649473: #KHAN
+            if "among us" in message.content.lower():
+                await message.author.send("**NO**")
+            else:
+                await message.author.send("**Good Boy!**")
 
         elif "hello there" in message.content.lower():
             await message.author.send("https://tenor.com/view/grevious-general-kenobi-star-wars-gif-11406339")
+
+        elif "beans" in message.content.lower():
+            beans = discord.Embed()
+            beans.set_image(url="https://i.imgur.com/GkyCNCH.jpg")
+            beans.set_footer(text="You thought i was gone? Shh")
+            await message.author.send(embed=beans)
 
 def setup(client):
     client.add_cog(Meme(client))

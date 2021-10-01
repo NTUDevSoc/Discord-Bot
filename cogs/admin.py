@@ -21,6 +21,7 @@ class Admin(commands.Cog, command_attrs=dict(hidden=True)):
         embed=discord.Embed(title="Admin Commands", description="*This dialog gives you all the admin commands for DevBot.*", color=0xe7ec11)
         embed.add_field(name=".clearchat (AMOUNT)", value="Clears a set number of messages from the chat.", inline=False)
         embed.add_field(name=".servermute @user", value="Server mutes or unmutes a user.", inline=False)
+        embed.add_field(name=".room (STATUS)", value="Sets the room status.", inline=False)
         embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await ctx.send(embed=embed)
 
