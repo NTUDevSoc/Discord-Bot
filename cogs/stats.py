@@ -1,6 +1,5 @@
-from os import stat
 import discord
-import datetime
+import time
 from discord.ext import commands
 
 async def is_admin(ctx):
@@ -15,21 +14,26 @@ class Stats(commands.Cog, command_attrs=dict(hidden=True)):
 
     def __init__(self, client):
         self.client = client
+        self.timestamp = time.time()
 
     @commands.command()
     @commands.check(is_admin)
     async def room(self, ctx, status = None):
+        if time.time() - self.timestamp >= 600:
+            await ctx.send(f"**Please wait {time.time() - self.timestamp} seconds before chaning**")
+            return
+
         if not status:
             return
 
         if status.lower() in ("opened", "open", "o"):
-            await self.client.roomChannel.edit(name="DevSoc Room: Open")
+            status = "Open"
         elif status.lower() in ("closed", "close", "c"):
-            await self.client.roomChannel.edit(name="DevSoc Room: Closed")
-        else:
-            await self.client.roomChannel.edit(name=f"DevSoc Room: {status}")
+            status = "Closed"
 
-
+        await self.client.roomChannel.edit(name=f"DevSoc Room: {status}")
+        await ctx.send(f"Room Status: **{status}**")
+        self.timestamp = time.time()
 
 
             
