@@ -20,7 +20,7 @@ class Stats(commands.Cog, command_attrs=dict(hidden=True)):
     @commands.check(is_admin)
     async def room(self, ctx, status = None):
         if time.time() - self.timestamp <= 300:
-            await ctx.send(f"**Please wait {time.time() - self.timestamp} seconds before chaning**")
+            await ctx.send(f"**Please wait 5 minutes before trying again**")
             return
 
         if not status:
