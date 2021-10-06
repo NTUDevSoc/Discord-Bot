@@ -77,10 +77,9 @@ class Admin(commands.Cog, command_attrs=dict(hidden=True)):
             memberRoleCount = 0
             for role in member.roles:
                 memberRoleCount += 1
-            if memberRoleCount == 2 and announcementRole in member.roles:
-                membersWithoutRoles.append("{0} ({1}#{2})".format(member.nick, member.name, member.discriminator))
-            elif memberRoleCount == 1:
-                membersWithoutRoles.append("{0} ({1}#{2})".format(member.nick, member.name, member.discriminator))
+            if (memberRoleCount == 2 and announcementRole in member.roles) or memberRoleCount == 1:
+                memberString = f'{member.name}#{member.discriminator}' if member.nick == None else f'{member.nick} ({member.name}#{member.discriminator})'
+                membersWithoutRoles.append(memberString)
         with open("result.txt", "w") as file:
             for member in membersWithoutRoles:
                 file.write(member+"\n")
