@@ -22,6 +22,7 @@ class Admin(commands.Cog, command_attrs=dict(hidden=True)):
         embed.add_field(name=".clearchat (AMOUNT)", value="Clears a set number of messages from the chat.", inline=False)
         embed.add_field(name=".servermute @user", value="Server mutes or unmutes a user.", inline=False)
         embed.add_field(name=".room (STATUS)", value="Sets the room status.", inline=False)
+        embed.add_field(name=".unassignedmembers", value="Provides a file of members with no role or just announcement role.", inline=False)
         embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await ctx.send(embed=embed)
 
@@ -77,9 +78,9 @@ class Admin(commands.Cog, command_attrs=dict(hidden=True)):
             for role in member.roles:
                 memberRoleCount += 1
             if memberRoleCount == 2 and announcementRole in member.roles:
-                membersWithoutRoles.append(member.name + "#" + member.discriminator)
+                membersWithoutRoles.append("{0} ({1}#{2})".format(member.nick, member.name, member.discriminator))
             elif memberRoleCount == 1:
-                membersWithoutRoles.append(member.name + "#" + member.discriminator)
+                membersWithoutRoles.append("{0} ({1}#{2})".format(member.nick, member.name, member.discriminator))
         with open("result.txt", "w") as file:
             for member in membersWithoutRoles:
                 file.write(member+"\n")
