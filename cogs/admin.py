@@ -66,6 +66,28 @@ class Admin(commands.Cog, command_attrs=dict(hidden=True)):
             embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
             await self.client.botLogChannel.send(embed=embed)
 
+    @commands.command(aliases=['unassigned'])
+    @commands.check(is_admin)
+    async def unassignedmembers(self, ctx):
+        membersWithoutRoles = []
+        guild = ctx.message.guild
+        announcementRole = guild.get_role(668158580716732456)
+        for member in guild.members:
+            memberRoleCount = 0
+            for role in member.roles:
+                memberRoleCount += 1
+            if memberRoleCount == 2 and announcementRole in member.roles:
+                membersWithoutRoles.append(member.name + "#" + member.discriminator)
+            elif memberRoleCount == 1:
+                membersWithoutRoles.append(member.name + "#" + member.discriminator)
+        with open("result.txt", "w") as file:
+            for member in membersWithoutRoles:
+                file.write(member+"\n")
+        with open("result.txt", "rb") as file:
+            await ctx.send("There are {0} members without a role on the server. Here are the members without roles:".format(len(membersWithoutRoles)), file=discord.File(file, "result.txt"))
+        file.close()
+
+
             
 def setup(client):
     client.add_cog(Admin(client))
