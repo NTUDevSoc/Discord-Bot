@@ -69,38 +69,52 @@ class General(commands.Cog):
     @commands.check(command_channels)
     async def members(self, ctx):
         devMembers = {
-            "first": 0,
-            "second": 0,
-            "placement": 0,
-            "final": 0,
-            "masters": 0,
-            "alumni": 0
+            "First Year": 0,
+            "Second Year": 0,
+            "Placement Year": 0,
+            "Third Year": 0,
+            "Fourth Year": 0,
+            "MSc Student": 0,
+            "Alumni": 0
         }
         guild = ctx.message.guild
         for member in guild.members:
             for role in member.roles:
-                if role.name == "First Year":
-                    devMembers["first"] += 1
-                elif role.name == "Second Year":
-                    devMembers["second"] += 1
-                elif role.name == "Placement Year":
-                    devMembers["placement"] += 1
-                elif role.name == "Third Year":
-                    devMembers["final"] += 1
-                elif role.name == "Fourth Year":
-                    devMembers["final"] += 1
-                elif role.name == "MSc Student":
-                    devMembers["masters"] += 1
-                elif role.name == "Alumni":
-                    devMembers["alumni"] += 1
+                if role.name in devMembers:
+                    devMembers[role.name] += 1
         count=discord.Embed(title="__DevSoc Members__", description="*Here are the members of each year group within this server.*", color=0xe7ec11)
-        count.add_field(name="First Year", value=str(devMembers["first"])+" members", inline=False)
-        count.add_field(name="Second Year", value=str(devMembers["second"])+" members", inline=False)
-        count.add_field(name="Placement Year", value=str(devMembers["placement"])+" members", inline=False)
-        count.add_field(name="Third/Final Year", value=str(devMembers["final"])+" members", inline=False)
-        count.add_field(name="MSc Student", value=str(devMembers["masters"])+" members", inline=False)
-        count.add_field(name="Alumni", value=str(devMembers["alumni"])+" members", inline=False)
+        finalYearTotal = 0
+        for year in devMembers:
+            if year == "Third Year":
+                finalYearTotal += devMembers[year]
+            elif year == "Fourth Year":
+                finalYearTotal += devMembers[year]
+                count.add_field(name="Third/Final Year", value=str(finalYearTotal)+" members", inline=False)
+            else:
+                count.add_field(name=year, value=str(devMembers[year])+" members", inline=False)
         count.set_footer(text="Feature developed by Emi/Peter")
+        await ctx.send(embed=count)
+
+    @commands.command(aliases=['coursecount', 'coursecheck', 'courselist'])
+    @commands.check(command_channels)
+    async def courses(self, ctx):
+        devCourses = {
+            "Computer Science": 0,
+            "Software Engineering": 0,
+            "Computer Science (Games Technology)": 0,
+            "Computer Systems (Cyber Security)": 0,
+            "Computing": 0,
+            "Other": 0
+        }
+        guild = ctx.message.guild
+        for member in guild.members:
+            for role in member.roles:
+                if role.name in devCourses:
+                    devCourses[role.name] += 1
+        count=discord.Embed(title="__DevSoc Members - Courses__", description="*Here are the members of each course within this server.*", color=0xe7ec11)
+        for course in devCourses:
+            count.add_field(name=course, value=str(devCourses[course])+" members", inline=False)
+        count.set_footer(text="Feature developed by Peter")
         await ctx.send(embed=count)
 
     @commands.Cog.listener()
