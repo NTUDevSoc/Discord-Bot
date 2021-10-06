@@ -59,6 +59,7 @@ class General(commands.Cog):
         thehelp.add_field(name=".whois", value="Check who someone in the server is.", inline=False)
         thehelp.add_field(name=".github", value="Links to the github source code of the bot.", inline=False)
         thehelp.add_field(name=".members", value="Checks the members of each year group in the server.", inline=False)
+        thehelp.add_field(name=".courses", value="Checks the members of each course in the server.", inline=False)
         thehelp.add_field(name=".highlight", value=".highlight set [word] - To be notified whenever the word is said\n.highlight remove - Remove yourself from the highlights", inline=False)
         thehelp.add_field(name=".covidoverview", value="Gives an overview of UK COVID cases.", inline=False)
         thehelp.add_field(name=".covidregion (REGION)", value="Gives an overview of COVID cases in a region of the UK.", inline=False)
