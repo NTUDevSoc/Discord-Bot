@@ -38,8 +38,8 @@ class Logs(commands.Cog):
 
         else:
             embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
-            
-        embed.add_field(name="__Message Channel__", value=f"<#{message.channel.name}>", inline=False)
+
+        embed.add_field(name="__Message Channel__", value=message.channel.mention, inline=False)
 
         if message.attachments:
             file_names = ""
