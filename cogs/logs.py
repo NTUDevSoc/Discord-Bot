@@ -15,7 +15,7 @@ class Logs(commands.Cog):
             return
 
         embed = None
-        if message:
+        if message.content:
             if before != None:
                 embed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
                 embed.set_footer(text="Edited at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
