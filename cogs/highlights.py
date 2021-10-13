@@ -32,6 +32,9 @@ class Highlights(commands.Cog):
         if message.channel.id in (505094359272652831, 813461899542790164, 505476463492071425, 814152479100633128, 886582676218331186):
             return
 
+        if message.embeds:
+            return
+
         for user_id, word in self.highlight_data.items():
             if word in message.content.lower().split():
                 
