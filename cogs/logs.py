@@ -13,9 +13,6 @@ class Logs(commands.Cog):
         
         if isinstance(message.channel, discord.channel.DMChannel):
             return
-        
-        if before.content == message.content:
-            return
 
         embed = None
 
@@ -75,7 +72,10 @@ class Logs(commands.Cog):
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
 
-       await self.client.botLogChannel.send(embed=self.message_logs(after,before))
+        if before.content == after.content:
+            return
+
+        await self.client.botLogChannel.send(embed=self.message_logs(after,before))
 
 def setup(client):
     client.add_cog(Logs(client))
