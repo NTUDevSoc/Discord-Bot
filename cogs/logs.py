@@ -2,7 +2,6 @@ import discord
 import datetime
 from datetime import datetime
 from discord.ext import commands
-from discord import RawReactionActionEvent
 
 class Logs(commands.Cog):
 
@@ -15,7 +14,11 @@ class Logs(commands.Cog):
             return
 
         embed = None
-        if message.content:
+        if message.embeds:
+            embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
+            embed.add_field(name="__Message Content__", value="[Embedded Message]", inline=False)
+            embed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
+        elif message.content:
             if before != None:
                 embed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
                 embed.set_footer(text="Edited at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
