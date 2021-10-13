@@ -17,7 +17,7 @@ class Logs(commands.Cog):
         if message.embeds:
             embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
             embed.add_field(name="__Message Content__", value="[Embedded Message]", inline=False)
-            embed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
+
         elif message.content:
             if before != None:
                 embed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
@@ -36,9 +36,10 @@ class Logs(commands.Cog):
             else:
                 embed.add_field(name="__Message Content__", value=message.content, inline=False)
 
-            embed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
         else:
             embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
+            
+        embed.add_field(name="__Message Channel__", value=f"<#{message.channel.name}>", inline=False)
 
         if message.attachments:
             file_names = ""
@@ -50,7 +51,7 @@ class Logs(commands.Cog):
             for ext in pic_ext:
                 if message.attachments[0].filename.endswith(ext):
                     embed.set_image(url=message.attachments[0].url)
-
+        
         return embed
 
 
