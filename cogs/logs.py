@@ -15,25 +15,27 @@ class Logs(commands.Cog):
             return
 
         embed = None
+        if message:
+            if before != None:
+                embed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
+                embed.set_footer(text="Edited at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+            else:
+                embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
+                embed.set_footer(text="Deleted at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
 
-        if before != None:
-            embed=discord.Embed(title="__**Message Edited**__", description="Message Author: "+message.author.mention, color=0xe7ec11)
-            embed.set_footer(text="Edited at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
+            if message.reference != None:
+                if message.reference.resolved != None:
+                    embed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
+
+            if before != None:
+                embed.add_field(name="__Message Before__", value=before.content, inline=False)
+                embed.add_field(name="__Message After__", value=message.content, inline=False)
+            else:
+                embed.add_field(name="__Message Content__", value=message.content, inline=False)
+
+            embed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
         else:
             embed=discord.Embed(title="__**Message Deleted**__", description="Message Author: "+message.author.mention, color=0xe80202)
-            embed.set_footer(text="Deleted at: "+str(datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-
-        if message.reference != None:
-            if message.reference.resolved != None:
-                embed.add_field(name="__Reply to "+message.reference.resolved.author.name+"'s Message__", value=message.reference.resolved.content, inline=False)
-
-        if before != None:
-            embed.add_field(name="__Message Before__", value=before.content, inline=False)
-            embed.add_field(name="__Message After__", value=message.content, inline=False)
-        else:
-            embed.add_field(name="__Message Content__", value=message.content, inline=False)
-
-        embed.add_field(name="__Message Channel__", value=message.channel.name, inline=False)
 
         if message.attachments:
             file_names = ""
