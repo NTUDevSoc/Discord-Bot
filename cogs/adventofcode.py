@@ -5,7 +5,7 @@ import datetime
 import requests
 
 async def command_channels(ctx):
-    return ctx.channel.id in (517651663729852416, 505476463492071425)
+    return ctx.channel.id in (517651663729852416, 505476463492071425, 783009748001620039)
     
 class Adventofcode(commands.Cog):
 
