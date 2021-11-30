@@ -41,7 +41,7 @@ class Logs(commands.Cog):
             else:
                 embed.add_field(name="__Message Content__", value=message.content, inline=False)
 
-        #So Embed dosnt error - More detail of embed could be added
+        #So Embed doesn't error - More detail of embed could be added
         if message.embeds:
             embed.add_field(name="__Message Content__", value="[Embedded Message]", inline=False)
 
