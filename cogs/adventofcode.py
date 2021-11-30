@@ -92,3 +92,9 @@ class Adventofcode(commands.Cog):
 
 def setup(client):
     client.add_cog(Adventofcode(client))
+
+
+#Timer variable for advent of code command
+adventCodeTimer = 0
+#Advent code cached data
+adventCache = []
