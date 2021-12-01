@@ -29,7 +29,7 @@ class Adventofcode(commands.Cog):
             pass
         else:
             adventCodeTimer = datetime.datetime.now()
-            sessionValue = "53616c7465645f5f871fdafed7f7a02ba9da7486e73f84347297cdc6a9245c0a5d85e11941af37302408c7674815fe8e"
+            sessionValue = "53616c7465645f5feafb8776e83c6df5eefa9d89a8b82fb597f5a430cf47b76f03119daa005972eb810dab8a211fb8ef"
             cookies = {'session': sessionValue}
             response =  requests.get("https://adventofcode.com/2021/leaderboard/private/view/984355.json", cookies=cookies, timeout=10)
             assert response.status_code == 200, f"Failed request: {response.text}"
