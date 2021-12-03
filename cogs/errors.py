@@ -24,5 +24,10 @@ class Error(commands.Cog):
         embed.set_footer(text="Feature developed by <J4Y>", icon_url="https://www.j4y.dev/botassets/j4y.gif")
         await self.client.botLogChannel.send(embed=embed)
 
+    @commands.Cog.listener()
+    async def on_disconnect(self):
+        print("\n DISCONNECTED \n")
+        await self.client.botLogChannel.send("Sorry i disconnected <@153487284061077504>")
+
 def setup(client):
     client.add_cog(Error(client))
