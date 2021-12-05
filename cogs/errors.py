@@ -27,7 +27,7 @@ class Error(commands.Cog):
     @commands.Cog.listener()
     async def on_disconnect(self):
         print("\n DISCONNECTED \n")
-        await self.client.botLogChannel.send("Sorry i disconnected <@153487284061077504>")
+        await self.client.botLogChannel.send("Sorry i disconnected")
 
 def setup(client):
     client.add_cog(Error(client))
