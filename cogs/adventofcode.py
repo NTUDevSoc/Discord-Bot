@@ -43,6 +43,8 @@ class Adventofcode(commands.Cog):
         advent=discord.Embed(title="__Advent of Code - Leaderboard__", color=0xe7ec11)
         theScores = ""
         for x in dataArray:
+            if int(x[1]) < 1:
+                continue
             username = x[0]
             score = x[1]
             theScores = theScores + "**"+str(username)+"**: "+str(score)+"\n"
