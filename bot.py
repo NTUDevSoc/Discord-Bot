@@ -27,8 +27,8 @@ async def on_ready():
 
 #function to make the bot print every 28mins so Heroku doesn't stop it
 async def stay_awake():
-    await bot.wait_until_ready()
-    while not bot.is_closed():
+    await client.wait_until_ready()
+    while not client.is_closed():
         print('Im awake :)')
         await asyncio.sleep(1680) #runs every 28mins.
 
