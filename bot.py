@@ -10,7 +10,7 @@ intents.messages = True
 intents.guilds = True
 intents.reactions = True
 
-client = commands.Bot(command_prefix=".", owner_id=153487284061077504, description="DevBot", intents=intents)
+client = commands.Bot(command_prefix=".", owner_id=83616065854115840, description="DevBot", intents=intents)
 client.remove_command('help')
 
 TOKEN = os.environ["TOKEN"]
