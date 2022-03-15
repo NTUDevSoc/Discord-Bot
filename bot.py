@@ -25,9 +25,17 @@ async def on_ready():
     client.botCommandChannel = await client.fetch_channel(517651663729852416)
     client.roomChannel = await client.fetch_channel(892436503890915438)
 
+#function to make the bot print every 28mins so Heroku doesn't stop it
+async def stay_awake():
+    await bot.wait_until_ready()
+    while not bot.is_closed():
+        print('Im awake :)')
+        await asyncio.sleep(1680) #runs every 28mins.
+
 for filename in os.listdir("./cogs"):
     if filename.endswith(".py"):
         client.load_extension(f"cogs.{filename[:-3]}")
         print(f"Loaded Cog: {filename}")
 
+client.loop.create_task(stay_awake())
 client.run(TOKEN)
