@@ -307,7 +307,7 @@ class Roles(commands.Cog):
         await ctx.send('Manually updated roles!')
 
     async def update_roles(self):
-        for guild in self.bot.guilds:
+        for guild in self.client.guilds:
             self.first_year = discord.utils.get(guild.roles, name='First Year')
             self.second_year = discord.utils.get(guild.roles, name='Second Year')
             self.third_year = discord.utils.get(guild.roles, name='Third Year')
