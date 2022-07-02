@@ -5,6 +5,12 @@ from discord import RawReactionActionEvent
 async def command_channels(ctx):
     return ctx.channel.id in (517651663729852416, 505476463492071425)
 
+async def is_admin(ctx):
+    committee = discord.utils.get(ctx.guild.roles, name='Committee')
+    elders = discord.utils.get(ctx.guild.roles, name='DevSoc Elders')
+    trainee = discord.utils.get(ctx.guild.roles, name='Trainee Committee')
+    return True if committee in ctx.message.author.roles or elders in ctx.message.author.roles or trainee in ctx.message.author.roles else False
+
 #Roles By Emi
 
 class Roles(commands.Cog):
@@ -295,7 +301,7 @@ class Roles(commands.Cog):
 
     @commands.command(hidden=True)
     @commands.check(command_channels)
-    @commands.is_owner()
+    @commands.check(is_admin)
     async def updateroles(self, ctx):
         await self.update_roles()
         await ctx.send('Manually updated roles!')
