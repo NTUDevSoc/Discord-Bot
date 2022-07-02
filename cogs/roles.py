@@ -306,6 +306,13 @@ class Roles(commands.Cog):
         await self.update_roles()
         await ctx.send('Manually updated roles!')
 
+    @commands.command(hidden=True)
+    @commands.check(command_channels)
+    @commands.check(is_admin)
+    async def woopslemmejustrevertdemroles(self, ctx):
+        await self.revert_roles()
+        await ctx.send('Manually reverted roles!')
+
     async def update_roles(self):
         for guild in self.client.guilds:
             self.first_year = discord.utils.get(guild.roles, name='First Year')
@@ -334,6 +341,28 @@ class Roles(commands.Cog):
                 elif self.fourth_year in member.roles:
                     await member.remove_roles(self.fourth_year)
                     await member.add_roles(self.alumni)
+                    
+    async def revert_roles(self):
+        for guild in self.client.guilds:
+            self.first_year = discord.utils.get(guild.roles, name='First Year')
+            self.second_year = discord.utils.get(guild.roles, name='Second Year')
+            self.third_year = discord.utils.get(guild.roles, name='Third Year')
+            self.placement_year = discord.utils.get(guild.roles, name='Placement Year')
+            self.fourth_year = discord.utils.get(guild.roles, name='Fourth Year')
+            for member in guild.members:
+                if self.second_year in member.roles:
+                    await member.remove_roles(self.second_year)
+                    await member.add_roles(self.first_year)
+                elif self.third_year in member.roles:
+                    await member.remove_roles(self.third_year)
+                    await member.add_roles(self.second_year)
+                elif self.placement_year in member.roles:
+                    await member.remove_roles(self.placement_year)
+                    await member.add_roles(self.second_year)
+                elif self.fourth_year in member.roles:
+                    await member.remove_roles(self.fourth_year)
+                    await member.add_roles(self.placement_year)
+
 
 def setup(client):
     client.add_cog(Roles(client))
