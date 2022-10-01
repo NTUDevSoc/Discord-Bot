@@ -1,0 +1,9 @@
+[bot]
+token = ""
+prefix = ""
+
+[database]
+psql_uri = ""
+
+[apis]
+
