@@ -1,9 +1,11 @@
 [bot]
 token = ""
-prefix = ""
+prefix = "."
 
 [database]
-psql_uri = ""
+psql_uri = "postgresql://username:password@host/database"
 
 [apis]
 
+[logs]
+error = "https://discord.com/api/webhooks/..."
