@@ -27,7 +27,7 @@ class Highlights(commands.Cog):
             return
         
         if "hannah" in message.content.lower():
-            await message.channel.send("<@!131332703919276032> sus")
+            await message.channel.send("<@!131332703919276032> <:redacted:1101230074667204718> sus <:redacted:1101230074667204718>")
 
         if message.channel.id in (505094359272652831, 813461899542790164, 505476463492071425, 814152479100633128, 886582676218331186):
             return
