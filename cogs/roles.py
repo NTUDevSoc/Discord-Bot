@@ -304,7 +304,7 @@ class Roles(commands.Cog):
     @commands.check(is_admin)
     async def updateroles(self, ctx):
         await ctx.send('Updating roles, please wait...')
-        await self.update_roles()
+        await self.update_roles(ctx)
         await ctx.send('Manually updated roles!')
 
     @commands.command(hidden=True)
@@ -312,10 +312,10 @@ class Roles(commands.Cog):
     @commands.check(is_admin)
     async def woopslemmejustrevertdemroles(self, ctx):
         await ctx.send('Reverting roles, please wait...')
-        await self.revert_roles()
+        await self.revert_roles(ctx)
         await ctx.send('Manually reverted roles!')
 
-    async def update_roles(self):
+    async def update_roles(self, ctx):
         for guild in self.client.guilds:
             self.first_year = discord.utils.get(guild.roles, name='First Year')
             self.second_year = discord.utils.get(guild.roles, name='Second Year')
@@ -348,7 +348,7 @@ class Roles(commands.Cog):
                     await member.remove_roles(self.fourth_year)
                     await member.add_roles(self.alumni)
                     
-    async def revert_roles(self):
+    async def revert_roles(self, ctx):
         for guild in self.client.guilds:
             self.first_year = discord.utils.get(guild.roles, name='First Year')
             self.second_year = discord.utils.get(guild.roles, name='Second Year')
