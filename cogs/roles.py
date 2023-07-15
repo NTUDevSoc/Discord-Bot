@@ -303,6 +303,7 @@ class Roles(commands.Cog):
     @commands.check(command_channels)
     @commands.check(is_admin)
     async def updateroles(self, ctx):
+        await ctx.send('Updating roles, please wait...')
         await self.update_roles()
         await ctx.send('Manually updated roles!')
 
@@ -310,6 +311,7 @@ class Roles(commands.Cog):
     @commands.check(command_channels)
     @commands.check(is_admin)
     async def woopslemmejustrevertdemroles(self, ctx):
+        await ctx.send('Reverting roles, please wait...')
         await self.revert_roles()
         await ctx.send('Manually reverted roles!')
 
@@ -322,7 +324,11 @@ class Roles(commands.Cog):
             self.fourth_year = discord.utils.get(guild.roles, name='Fourth Year')
             self.alumni = discord.utils.get(guild.roles, name='Alumni')
             self.placement = discord.utils.get(guild.roles, name='Placement')
+            i = 0 # lazi logging
             for member in guild.members:
+                i += 1
+                if i % 20 == 0:
+                    await ctx.send(f'Updated {i} roles...')
                 if self.first_year in member.roles:
                     await member.remove_roles(self.first_year)
                     await member.add_roles(self.second_year)
@@ -349,7 +355,11 @@ class Roles(commands.Cog):
             self.third_year = discord.utils.get(guild.roles, name='Third Year')
             self.placement_year = discord.utils.get(guild.roles, name='Placement Year')
             self.fourth_year = discord.utils.get(guild.roles, name='Fourth Year')
+            i = 0 # lazi logging
             for member in guild.members:
+                i += 1
+                if i % 20 == 0:
+                    await ctx.send(f'Reverted {i} roles...')
                 if self.second_year in member.roles:
                     await member.remove_roles(self.second_year)
                     await member.add_roles(self.first_year)
