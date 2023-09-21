@@ -103,6 +103,7 @@ class General(commands.Cog):
             "Computer Science": 0,
             "Software Engineering": 0,
             "Computer Science (Games Technology)": 0,
+            "Computer Science (Artificial Intelligence)": 0,
             "Computer Systems (Cyber Security)": 0,
             "Computing": 0,
             "Other": 0
