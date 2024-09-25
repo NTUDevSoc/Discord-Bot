@@ -4,9 +4,11 @@ from discord.ext import commands
 
 async def is_admin(ctx):
     committee = discord.utils.get(ctx.guild.roles, name='Committee')
+    srCommittee = discord.utils.get(ctx.guild.roles, name='SR Committee')
+    supCommittee = discord.utils.get(ctx.guild.roles, name='Supporting Committee')
     elders = discord.utils.get(ctx.guild.roles, name='DevSoc Elders')
     trainee = discord.utils.get(ctx.guild.roles, name='Trainee Committee')
-    return True if committee in ctx.message.author.roles or elders in ctx.message.author.roles or trainee in ctx.message.author.roles else False
+    return True if committee in ctx.message.author.roles or supCommittee in ctx.message.author.roles or  srCommittee in ctx.message.author.roles or elders in ctx.message.author.roles or trainee in ctx.message.author.roles else False
 
 class Stats(commands.Cog, command_attrs=dict(hidden=True)):
 
