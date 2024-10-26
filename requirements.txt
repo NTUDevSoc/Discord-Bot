@@ -1,4 +1,4 @@
 discord.py
 mysql-connector
-requests==2.24.0
+requests==2.31.0
 datetime
