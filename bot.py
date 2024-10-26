@@ -33,10 +33,20 @@ async def stay_awake():
         print('Im awake :)')
         await asyncio.sleep(1680) #runs every 28mins.
 
-for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        client.load_extension(f"cogs.{filename[:-3]}")
-        print(f"Loaded Cog: {filename}")
+@client.event
+async def setup_hook():
+    #schedule the stay_awake task
+    client.loop.create_task(stay_awake())
 
-client.loop.create_task(stay_awake())
-client.run(TOKEN)
+async def load_cogs():
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            await client.load_extension(f"cogs.{filename[:-3]}")
+            print(f"Loaded Cog: {filename}")
+
+async def main():
+    async with client:
+        await load_cogs()
+        await client.start(TOKEN)
+
+asyncio.run(main())
