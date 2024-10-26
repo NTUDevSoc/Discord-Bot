@@ -1,4 +1,4 @@
-discord.py
+discord.py==1.7.3
 mysql-connector
 requests==2.24.0
 datetime
